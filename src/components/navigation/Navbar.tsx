@@ -25,10 +25,13 @@ const Navbar: React.FC = () => {
 
   useEffect(() => {
     let u: any = ls.get("wwph_usr", { decrypt: true });
+
     if (u) setRole(u.role);
 
     const handleScroll = () => {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const scrollTop =
+        window.scrollY || document.documentElement.scrollTop;
+
       setIsScrolled(scrollTop > 0);
     };
 
@@ -45,33 +48,35 @@ const Navbar: React.FC = () => {
       { label: "About Us", path: "about" },
 
       // {
-//   label: "SmartStart",
-//   path: "smart-start",
-//   subMenu: [
-//     { label: "SkillStamp", path: "company" },
-//     { label: "SmartGuide", path: "career-tips" },
-//   ],
-// },
+      //   label: "SmartStart",
+      //   path: "smart-start",
+      //   subMenu: [
+      //     { label: "SkillStamp", path: "company" },
+      //     { label: "SmartGuide", path: "career-tips" },
+      //   ],
+      // },
 
-       {
+      {
         label: "Employers",
-        path: "employers-dashboard",
+        path: "/employers-dashboard",
         subMenu: [
-          { label: "Ordinary", path: "company" },
-          { label: "SmartStart", path: "career-tips" },
+          { label: "Ordinary", path: "/ordinary" },
+          { label: "SmartStart", path: "/employers-smartstart" },
         ],
       },
 
       {
         label: "Freelancers",
-        path: "login",
+        path: "/login",
         subMenu: [
-          { label: "Ordinary", path: "login" },
-          { label: "SmartStart", path: "login" },
-          { label: "TalentVault", path: "login" },
-          { label: "In-House ", path: "login" },
+          { label: "Ordinary", path: "/candidate-ordinary" },
+          { label: "SmartStart", path: "/candidate-smartstart" },
+          { label: "TalentVault", path: "/candidate-talentvault" },
+          { label: "In-House", path: "/candidate-inhouse" },
         ],
       },
+
+      { label: "Social Impact", path: "delete-account" },
 
       { label: "Log in", path: "login" },
     ],
@@ -85,21 +90,43 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <div className={isScrolled ? "navbar-wrapper shadow-lg" : "navbar-wrapper"}>
+    <div
+      className={
+        isScrolled
+          ? "navbar-wrapper shadow-lg"
+          : "navbar-wrapper"
+      }
+    >
       <div className="navbar-container">
         <Link to="/" className="logo">
-          <img src={Images.Logo} alt="logo" className="w-[150px] h-[120px]" />
+          <img
+            src={Images.Logo}
+            alt="logo"
+            className="w-[150px] h-[120px]"
+          />
         </Link>
 
         <div className="menu-toggle" onClick={toggleMenu}>
           {isMenuOpen ? (
-            <LiaTimesSolid size={34} color=" #008000" className="icon" />
+            <LiaTimesSolid
+              size={34}
+              color="#008000"
+              className="icon"
+            />
           ) : (
-            <HiOutlineBars3BottomRight size={34} color="#FF00FF" className="icon" />
+            <HiOutlineBars3BottomRight
+              size={34}
+              color="#FF00FF"
+              className="icon"
+            />
           )}
         </div>
 
-        <nav className={`navbar-menu ${isMenuOpen ? "open" : ""} font-sans text-[14px] font-medium`}>
+        <nav
+          className={`navbar-menu ${
+            isMenuOpen ? "open" : ""
+          } font-sans text-[14px] font-medium`}
+        >
           {navigationLinks.map((link) => {
             if (link.path === "login" && activeToken) return null;
 
@@ -109,15 +136,22 @@ const Navbar: React.FC = () => {
                 <div
                   key={link.label}
                   className="dropdown"
-                  onMouseEnter={() => setOpenDropdown(link.label)}
-                  onMouseLeave={() => setOpenDropdown(null)}
+                  onMouseEnter={() =>
+                    setOpenDropdown(link.label)
+                  }
+                  onMouseLeave={() =>
+                    setOpenDropdown(null)
+                  }
                 >
                   <button className="menu-link flex items-center">
                     {link.label}
+
                     <IoMdArrowDropdown
                       color="#2AA100"
                       className={`ml-1 transition-transform duration-300 ${
-                        openDropdown === link.label ? "rotate-180" : "rotate-0"
+                        openDropdown === link.label
+                          ? "rotate-180"
+                          : "rotate-0"
                       }`}
                     />
                   </button>
@@ -149,7 +183,11 @@ const Navbar: React.FC = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`menu-link ${activeLink === link.path ? "active" : ""}`}
+                className={`menu-link ${
+                  activeLink === link.path
+                    ? "active"
+                    : ""
+                }`}
                 onClick={() => {
                   toggleMenu();
                   handleClick(link.path);
