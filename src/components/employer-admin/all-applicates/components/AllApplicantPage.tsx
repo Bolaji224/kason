@@ -157,7 +157,7 @@ const ApplicantsPage: React.FC = () => {
   }
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen py-[8rem]">
+    <div className="lg:ml-64 p-6 bg-gray-50 min-h-screen py-[8rem]">
       <header className="mb-8 border-b pb-4">
         <h1 className="text-2xl font-bold text-gray-800 mb-2">Applicants</h1>
         {jobDetails && <p className="text-gray-600">{jobDetails.title}</p>}
@@ -213,11 +213,13 @@ const ApplicantsPage: React.FC = () => {
                   ? applicant.user.skills.split(",").map((s: string) => s.trim())
                   : ["N/A"]
               }
-              profileImage={
-                applicant.user?.avatar
-                  ? `${process.env.REACT_APP_API_URL}/${applicant.user.avatar}`
-                  : "/default-avatar.png"
-              }
+           profileImage={
+  applicant.user?.avatar
+    ? applicant.user.avatar.startsWith('http')
+      ? applicant.user.avatar
+      : `${import.meta.env.VITE_API_URL?.replace('/api/v1', '')}/${applicant.user.avatar}`
+    : "/default-avatar.png"
+}
               status={applicant.status}
               onDelete={() =>
                 setApplicants((prev) => prev.filter((_, i) => i !== index))

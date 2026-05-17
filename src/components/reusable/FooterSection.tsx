@@ -7,12 +7,14 @@ import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import { UilEnvelope } from '@iconscout/react-unicons';
 import { FaWhatsapp } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const FooterSection: React.FC = () => {
   const { ref, inView } = useInView({
     triggerOnce: false,
     threshold: 0.1,
   });
+  const navigate = useNavigate();
 
   // const location = useLocation()
   // let currentPath = location.pathname
@@ -126,8 +128,12 @@ const FooterSection: React.FC = () => {
        <Link to="/privacy-policy">
        <h2 className='text-white text-[14px] md:text-lg font-semibold'>Privacy Policy</h2>
        </Link>
-        <h2 className='text-white text-base md:text-lg font-semibold'>Terms & Conditions</h2>
-        <h2 className='text-white text-base md:text-lg font-semibold'>Cookies Policy</h2>
+        <h2
+          onClick={() => navigate("/Terms")}   
+        className='text-white text-base md:text-lg font-semibold cursor-pointer'>Terms & Conditions</h2>
+        <h2 
+        onClick={() => navigate("/cookie-policy")} 
+         className='text-white text-base md:text-lg font-semibold cursor-pointer'>Cookies Policy</h2>
       </div>
     </section>
 

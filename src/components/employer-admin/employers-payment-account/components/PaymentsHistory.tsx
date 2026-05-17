@@ -278,7 +278,7 @@ const PaymentsHistory: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
+    <div className="ml-0 lg:ml-60 bg-white rounded-lg shadow-md p-4 md:p-6">
       <h2 className="text-2xl font-bold mb-6">Payments History</h2>
 
       {/* Filters */}

@@ -65,7 +65,7 @@ const SmartStartSection: React.FC = () => {
             SmartStart™ is a launch toolkit that helps new freelancers get
               started faster and look professional from day one — even with no
               prior experience. It provides templates, guidance, and setup tools
-              to help them start earning quickly on WeWorkPerHour.
+              to help them start earning quickly on Workason.
             </p>
 
             {/* What's Inside Section*/}

@@ -142,7 +142,7 @@ const SmartGuidePage: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br mt-20 from-green-50 via-white to-green-50 p-6">
+    <div className=" ml-64 min-h-screen bg-gradient-to-br mt-20 from-green-50 via-white to-green-50 p-6">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12 mt-36">

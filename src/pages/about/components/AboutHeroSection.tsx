@@ -14,10 +14,7 @@ const AboutHeroSection: React.FC = () => {
 
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-3xl">
-        <p className="text-[#2AA100] mx-auto flex justify-center items-center gap-2 py-[0.5rem] px-[0.5rem] w-[160px] rounded-[5px] bg-[#D1FFBD]">
-          <FaUser />
-          About Workason
-        </p>
+        
 
         <h1 className="lg:text-[70px] md:text-[55px] text-[35px] mt-[1.5rem] font-bold tracking-wide leading-[1.2] text-white">
           We are here to assist <br />

@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
-import { httpGetWithToken } from './../../../utils/http_utils';
+import { httpGetWithToken } from "./../../../utils/http_utils";
 
 const CandidateProfile: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
-  
-  // Try to get applicant from navigation state
-  const initialApplicant = location.state?.applicant || null;
 
+  const initialApplicant = location.state?.applicant || null;
   const [applicant, setApplicant] = useState<any>(initialApplicant);
-  const [loading, setLoading] = useState(!initialApplicant); // Only load if no state
+  const [loading, setLoading] = useState(!initialApplicant);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // If we already have applicant from state, skip fetching
     if (applicant) return;
 
     const fetchApplicant = async () => {
@@ -34,9 +31,8 @@ const CandidateProfile: React.FC = () => {
       }
     };
 
-    if (id) {
-      fetchApplicant();
-    } else {
+    if (id) fetchApplicant();
+    else {
       setError("Invalid applicant ID.");
       setLoading(false);
     }
@@ -46,31 +42,57 @@ const CandidateProfile: React.FC = () => {
   if (error) return <div>{error}</div>;
   if (!applicant) return <div>No applicant data available</div>;
 
+  const user = applicant.user || applicant;
+  const isBrowseCandidate = !applicant.job;
+  const cvLink = applicant.smartcv || applicant.cv || null;
+
   return (
-    <div className=" mt-12 p-6 bg-gray-100 min-h-screen py-[8rem]">
-     <header className="mb-6">
-      <h1 className="text-2xl font-bold text-gray-800"> Applicant Information</h1>
-      <p className="text-gray-600">{applicant.user?.first_name || "Unnamed Applicant"}</p>
+    <div className="ml-60 mt-12 p-6 bg-gray-100 min-h-screen py-[8rem]">
+      <header className="mb-6">
+        <h1 className="text-2xl font-bold text-gray-800">Candidate Profile</h1>
+        <p className="text-gray-600">
+          {user?.name || `${user?.first_name || ""} ${user?.last_name || ""}` || "Unnamed Candidate"}
+        </p>
       </header>
 
-      <div className="bg-white p-4 rounded shadow">
-        <p><strong>Job:</strong> {applicant.job?.title || "N/A"}</p>
-        <p><strong>Experience:</strong> {applicant.experience_years} {applicant.experience_years === 1 ? "year" : "years"}</p>
-        <p><strong>Reason for applying:</strong> {applicant.reason || "N/A"}</p>
-        <p><strong>Status:</strong> {applicant.status || "N/A"}</p>
-        {applicant.cv && (
+      <div className="bg-white p-6 rounded shadow space-y-4">
+
+        {isBrowseCandidate && user?.email && (
+          <p><strong>Email:</strong> {user.email}</p>
+        )}
+
+        {user?.bio && (
+          <p><strong>Bio:</strong> {user.bio}</p>
+        )}
+
+        {applicant?.experience_years && (
           <p>
-            <strong>CV:</strong>{" "}
-            <a
-  href={applicant.cv}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="text-blue-500 underline"
->
-  View CV
-</a>
+            <strong>Experience:</strong> {applicant.experience_years}{" "}
+            {applicant.experience_years === 1 ? "year" : "years"}
           </p>
         )}
+
+        {cvLink && (
+          <p>
+            <strong>{applicant.smartcv ? "SmartCV" : "CV"}:</strong>{" "}
+            <a href={cvLink} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+              {applicant.smartcv ? "View SmartCV" : "View CV"}
+            </a>
+          </p>
+        )}
+
+        {!isBrowseCandidate && applicant?.job && (
+          <p><strong>Job:</strong> {applicant.job.title}</p>
+        )}
+
+        {!isBrowseCandidate && applicant?.reason && (
+          <p><strong>Reason for applying:</strong> {applicant.reason}</p>
+        )}
+
+        {!isBrowseCandidate && applicant?.status && (
+          <p><strong>Status:</strong> {applicant.status}</p>
+        )}
+
       </div>
     </div>
   );

@@ -122,6 +122,8 @@ const SmartCvForm: React.FC = () => {
     }));
   };
 
+const countChars = (text: string) => text.length;
+
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
     setDragStart({ x: e.clientX - transform.x, y: e.clientY - transform.y });
@@ -174,6 +176,10 @@ const SmartCvForm: React.FC = () => {
   };
 
 const handleSubmit = async () => {
+    if (countChars(formData.summary) < 50) {
+  alert("Professional Summary must be at least 50 characters.");
+  return;
+}
   try {
     // Create FormData
     const form = new FormData();
@@ -234,7 +240,13 @@ const handleSubmit = async () => {
     'Administrative Support',
     'Scheduling',
     'Document Preparation',
-    'Travel Arrangements'
+    'Travel Arrangements',
+    'Motion Graphics & Animation',
+    'Color & Visual Enhancement',
+    'Visual Effects & Cleanup',
+    'Audio Post-Production',
+    'Media Management',
+    'Content Optimization & Delivery'
   ];
 
   const toolOptions = [
@@ -245,11 +257,19 @@ const handleSubmit = async () => {
     'Google Workspace',
     'Zoom',
     'Calendly',
-    'Notion'
+    'Notion',
+    'Adobe Premiere Pro',
+    'DaVinci Resolve',
+    'DaVinci Resolve',
+    'CapCut',
+    'Cinema 4D',
+    'Adobe Animate',
+    'Adobe After Effects',
+    'Filmora'
   ];
 
   return (
-    <div className="min-h-screen py-8">
+    <div className=" min-h-screen py-8">
       <div className="max-w-4xl mx-auto px-4">
         {/* Header */}
         <div className="bg-white mt-16 rounded-lg shadow-sm mb-8 overflow-hidden">
@@ -264,7 +284,7 @@ const handleSubmit = async () => {
           <div className="p-6">
             <h1 className="text-2xl font-semibold text-gray-800 mb-2">Smart CV</h1>
             <p className="text-gray-600">
-              SmartCV is WeWorkPerHour's interactive, AI-ready freelancer résumé that helps talent stand out and clients make faster hiring decisions. It's more than a static CV — it's a profile plus portfolio in one, verified and formatted to highlight skills, experience, and achievements for maximum impact.
+              SmartCV is Workason's interactive, AI-ready freelancer résumé that helps talent stand out and clients make faster hiring decisions. It's more than a static CV — it's a profile plus portfolio in one, verified and formatted to highlight skills, experience, and achievements for maximum impact.
             </p>
           </div>
         </div>
@@ -421,20 +441,23 @@ const handleSubmit = async () => {
 
           {/* Summary */}
           <div>
-            <label htmlFor="summary" className="block text-sm font-medium text-gray-700 mb-2">
-              Professional Summary <span className="text-red-500">*</span>
-            </label>
-            <textarea
-              id="summary"
-              name="summary"
-              value={formData.summary}
-              onChange={handleInputChange}
-              rows={4}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-vertical"
-              placeholder="Brief description of your professional background and expertise..."
-              required
-            />
-          </div>
+  <label htmlFor="summary" className="block text-sm font-medium text-gray-700 mb-2">
+    Professional Summary <span className="text-red-500">*</span>
+  </label>
+  <textarea
+    id="summary"
+    name="summary"
+    value={formData.summary}
+    onChange={handleInputChange}
+    rows={4}
+    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-vertical"
+    placeholder="Brief description of your professional background and expertise..."
+    required
+  />
+  <p className={`text-sm mt-1 ${countChars(formData.summary) < 50 ? "text-red-500" : "text-green-600"}`}>
+  {countChars(formData.summary)} / 50 characters minimum
+</p>
+</div>
 
           {/* Skills and Tools Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

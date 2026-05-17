@@ -2,15 +2,20 @@ import axios from "axios";
 import _ from "lodash";
 import ls from "localstorage-slim";
 export const APP_API_URL = window.location.host.includes("localhost")
-? "http://localhost:8000/api/v1"
-  : "https://api.weworkperhour.com/api/v1";
+? "https://api.workason.site/api/v1"
+: "https://api.workason.site/api/v1";
 export const validatePasswordRegex =
   // /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
   /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/;
 
 export const httpPostWithoutToken = async (url, data) => {
   return await axios
-    .post(`${APP_API_URL}/${url}`, data)
+    .post(`${APP_API_URL}/${url}`, data, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      }
+    })
     .then((resp) => {
       return resp.data;
     })
@@ -18,9 +23,7 @@ export const httpPostWithoutToken = async (url, data) => {
       if (error.code === "ERR_NETWORK") {
         return { error: "An error occurred, please try again later" };
       }
-      const msg =
-        _.get(error, "response?.data?.message") ||
-        error?.response?.data?.message;
+      const msg = error?.response?.data?.message || "An error occurred";
       return {
         error: msg,
         message: msg,
@@ -50,8 +53,11 @@ export const httpPostWithToken = async (url, data) => {
         error?.response?.data?.message;
 
         if (msg === "Unauthenticated.") {
-          window.location.href = "/login"
-        }
+  const publicPaths = ["/", "/login", "/register", "/about", "/career-tips", "/hire-talent", "/faq"];
+  if (!publicPaths.includes(window.location.pathname)) {
+    window.location.href = "/login";
+  }
+}
       return { error: msg };
     });
 };
@@ -81,7 +87,7 @@ export const httpGetWithToken = async (url) => {
 };
 export const httpGetWithoutToken = async (url, data) => {
   return await axios
-    .get(`${APP_API_URL}/${url}`, data)
+    .get(`${APP_API_URL}/${url}`, { params: data })
     .then((resp) => {
       return resp.data;
     })

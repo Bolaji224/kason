@@ -24,8 +24,8 @@ const categories = [
   },
   {
     icon: <FaCamera className="text-blue-500 text-3xl"/>,
-    title: "Studio Booking",
-    description: "Book our Lagos studio for your next big production."
+    title: "Custom Virtual Assistant",
+    description: "Request tailored support from verifies virtual assistants fro adminstrative tasks, research, scheduling , email management, and other business needs."
   },
 ];
 

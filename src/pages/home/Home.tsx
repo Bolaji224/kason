@@ -10,6 +10,7 @@ import ComeJoinUsSection from './components/ComeJoinUsSection';
 import FooterSection from '../../components/reusable/FooterSection';
 import ReviewSection from './components/ReviewSection';
 import WorkasonLanding from './components/WorkasonLanding';
+import WorkasonSection from './components/Verified';
 
 
 
@@ -66,6 +67,7 @@ export const Home = () => {
       <SimpleProcessSection />
       <WorkasonLanding/>
       <OurPlatformSection />   
+      <WorkasonSection/>
       <ReviewSection/>
       <ComeJoinUsSection />
       <FooterSection />

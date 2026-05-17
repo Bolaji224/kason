@@ -81,7 +81,7 @@ export const seedGuides: GuideBlock[] = [
     level: "Beginner",
     roleOverview: "Intro to VA work, basic admin tasks, communication support, and simple online tools.",
     clientAcquisition: [
-      "Target LinkedIn, WeWorkPerHour, and beginner-friendly job boards (e.g., Fiverr, Upwork).",
+      "Target LinkedIn, Workason, and beginner-friendly job boards (e.g., Fiverr, Upwork).",
       "Send 5–10 personalised proposals daily.",
       "Join 3 Facebook/LinkedIn groups for VA opportunities.",
     ],
@@ -124,7 +124,7 @@ export const seedGuides: GuideBlock[] = [
     level: "Beginner",
     roleOverview: "Focus on proofreading and basic grammar correction for small businesses and individuals.",
     clientAcquisition: [
-      "Target LinkedIn, WeWorkPerHour, student networks.",
+      "Target LinkedIn, Workason, student networks.",
       "Offer free sample edits (up to 500 words) to attract first clients.",
     ],
     pricingPackages: ["$5–$10 per 1,000 words (₦5,000–₦8,000).", "Bundle: edit + basic formatting."],
@@ -141,7 +141,7 @@ export const seedGuides: GuideBlock[] = [
     title: "SmartGuide™ – Advanced Editor",
     category: "Editor",
     level: "Advanced",
-    roleOverview: "A freelancer already established on WeWorkPerHour, aiming to scale, increase rates, and win premium clients.",
+    roleOverview: "A freelancer already established on Workason, aiming to scale, increase rates, and win premium clients.",
     clientAcquisition: ["Leverage AI Matching for high-value leads.", "Pitch to repeat clients for long-term contracts."],
     pricingPackages: [
       "Increase rates by 20–50% based on portfolio strength.",

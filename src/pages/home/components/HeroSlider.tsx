@@ -13,7 +13,7 @@ const slidesData: SlideData[] = [
   {
     image: Images.SliderOneImage,
     title: "Unlock Opportunities in Freelance Work",
-    content: "Hire Virtual Assistants and Editors by the Hour",
+    content: "Hire Verified Virtual Assistants and Editors by the Hour",
     buttonText: "Get Started"
   },
   {

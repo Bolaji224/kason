@@ -105,7 +105,7 @@ const ApprovedCandidatesPage: React.FC = () => {
   }
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen py-[8rem]">
+    <div className="lg:ml-64 p-6 bg-gray-100 min-h-screen py-[8rem]">
       {/* Header */}
       <header className="mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b pb-4">
         <div>
@@ -113,7 +113,7 @@ const ApprovedCandidatesPage: React.FC = () => {
             Approved Candidates
           </h1>
           <p className="text-gray-600">
-            Manage and connect with the candidates you’ve approved.
+            Manage and connect with the candidates you've approved.
           </p>
         </div>
 
@@ -151,8 +151,10 @@ const ApprovedCandidatesPage: React.FC = () => {
                 <img
                   src={
                     a.user?.avatar
-                      ? `${process.env.REACT_APP_API_URL}/${a.user.avatar}`
-                      : "/default-avatar.png"
+                      ? a.user.avatar.startsWith('http') 
+                        ? a.user.avatar 
+                        : `${import.meta.env.VITE_API_URL?.replace('/api/v1', '')}/${a.user.avatar}`
+                      : `https://ui-avatars.com/api/?name=${encodeURIComponent(a.user?.name || 'User')}&background=0D8ABC&color=fff`
                   }
                   alt={a.user?.name || "Candidate"}
                   className="w-16 h-16 rounded-full object-cover border"
@@ -192,11 +194,13 @@ const ApprovedCandidatesPage: React.FC = () => {
               {/* Actions */}
               <div className="mt-5 flex justify-between items-center">
                 <button
-                  onClick={() => navigate(`/candidate-profile/${a.user?.id}`)}
-                  className="text-green-600 hover:underline"
-                >
-                  View Profile
-                </button>
+  onClick={() => navigate(`/candidate-profile/${a.user?.id}`, {
+    state: { applicant: a }
+  })}
+  className="text-green-600 hover:underline"
+>
+  View Profile
+</button>
 
                 <div className="flex gap-2">
                   <button

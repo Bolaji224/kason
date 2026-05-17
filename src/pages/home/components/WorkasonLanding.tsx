@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowRight, CheckCircle, Users, Shield, Zap } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function WorkasonLanding() {
   const steps = [
@@ -13,6 +14,7 @@ export default function WorkasonLanding() {
     "Easier to secure freelance projects",
     "Recognition from an international platform",
   ];
+  const navigate = useNavigate();
 
   return (
     <div className="bg-white">
@@ -20,7 +22,7 @@ export default function WorkasonLanding() {
       <section className="max-w-6xl mx-auto px-6 py-12 md:py-16 text-center">
         <h1 className="text-3xl md:text-5xl font-bold text-gray-900 leading-snug mb-4">
           The <span className="text-gray-900">diaspora-first</span> platform for
-          Virtual Assistants & Editors
+          Verified Virtual Assistants & Editors
         </h1>
         <p className="text-lg md:text-xl text-[#646A73] mb-8 max-w-3xl mx-auto">
           <span className="font-semibold text-[#2AA100]">SmartStart™</span> AI
@@ -28,7 +30,8 @@ export default function WorkasonLanding() {
           <span className="font-semibold text-[#2AA100]">ProofToPay</span> protection — all in one service.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="text-gray-900 px-6 py-3 rounded-lg font-semibold text-lg hover:bg-[#239100] transition-all duration-300 flex items-center justify-center gap-2 shadow-md">
+          <button className="text-gray-900 px-6 py-3 rounded-lg font-semibold text-lg hover:bg-[#239100] transition-all duration-300 flex items-center justify-center gap-2 shadow-md"
+          onClick={() => navigate("/login")}>
             🚀 Get Started
           </button>
           <button className="bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold text-lg border border-pink-500 hover:bg-pink-500 hover:text-gray-900 transition-all duration-300 flex items-center justify-center gap-2 shadow-md">
@@ -83,7 +86,9 @@ export default function WorkasonLanding() {
                 </div>
               ))}
             </div>
-            <button className="bg-gradient-to-r from-[#2AA100] to-[#239100] text-gray-900 px-6 py-3 rounded-lg font-semibold hover:from-[#239100] hover:to-[#1d7d00] transition-all duration-300 flex items-center gap-2 shadow-md">
+            <button 
+            onClick={() => navigate("/login")}
+            className="bg-gradient-to-r from-[#2AA100] to-[#239100] text-gray-900 px-6 py-3 rounded-lg font-semibold hover:from-[#239100] hover:to-[#1d7d00] transition-all duration-300 flex items-center gap-2 shadow-md">
               Start Training <ArrowRight className="w-4 h-4" />
             </button>
           </div>

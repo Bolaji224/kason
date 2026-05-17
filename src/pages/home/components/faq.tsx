@@ -41,12 +41,12 @@ const WeWorkPerHourFAQ: React.FC = () => {
             </div>
             <div>
               <strong>2. SmartStart Users</strong> → Clients request pre-vetted
-              freelancers (via SmartStart). WeWorkPerHour matches them with
+              freelancers (via SmartStart). Workason matches them with
               verified talent.
             </div>
             <div>
               <strong>3. Pro Talent Pool Users</strong> → Instead of freelancers,
-              WeWorkPerHour's in-house team (Editors or VAs) delivers the job from
+              Workason's in-house team (Editors or VAs) delivers the job from
               start to finish, with full project management.
             </div>
           </div>
@@ -56,14 +56,14 @@ const WeWorkPerHourFAQ: React.FC = () => {
     {
       id: "what-is",
       category: "General",
-      question: "What is WeWorkPerHour?",
+      question: "What is Workason?",
       answer:
-        "WeWorkPerHour is a UK-based freelance and outsourcing platform connecting clients with verified freelancers, pre-vetted talent, or our in-house managed team.",
+        "Workason is a UK-based freelance and outsourcing platform connecting clients with verified freelancers, pre-vetted talent, or our in-house managed team.",
     },
     {
       id: "who-can-use",
       category: "General",
-      question: "Who can use WeWorkPerHour?",
+      question: "Who can use Workason?",
       answer:
         "Clients (businesses, startups, individuals) and Freelancers (creatives, VAs, and editors).",
     },
@@ -128,14 +128,14 @@ const WeWorkPerHourFAQ: React.FC = () => {
       category: "Pro Talent Pool Users",
       question: "How is pricing set?",
       answer:
-        "Pricing is based on service packages (e.g., monthly editing retainers, VA support bundles). Clients pay WeWorkPerHour directly, and our internal team handles the job.",
+        "Pricing is based on service packages (e.g., monthly editing retainers, VA support bundles). Clients pay Workason directly, and our internal team handles the job.",
     },
     {
       id: "managed-management",
       category: "Pro Talent Pool Users",
       question: "Who manages the project?",
       answer:
-        "WeWorkPerHour fully manages communication, deadlines, and quality control.",
+        "Workason fully manages communication, deadlines, and quality control.",
     },
     {
       id: "payments-handled",
@@ -170,7 +170,7 @@ const WeWorkPerHourFAQ: React.FC = () => {
       category: "Other Common Questions",
       question: "How do I get SkillStamp verification?",
       answer:
-        "Freelancers take the SkillStamp test to get the badge. Students who purchase a WeWorkPerHour course get all the benefits of the SmartStart.",
+        "Freelancers take the SkillStamp test to get the badge. Students who purchase a Workason course get all the benefits of the SmartStart.",
     },
     {
       id: "international",

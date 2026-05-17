@@ -9,39 +9,34 @@ const TestimonialsPage: React.FC = () => {
       name: "Cora Shortlet and Lounge",
       image: Images.CoraTestimonialLogo,
       testimonial:
-        "Working with WeWorkPerHour has been a game-changer for our Lounge and Shortlets. Their virtual assistant services have streamlined our reservations, managed customer inquiries efficiently, and allowed our staff to focus more on delivering exceptional dining experiences. It is like having an extra set of hands that’s always available and incredibly reliable. Highly recommend!;",
+        "Working with Workason has been a game-changer for our Lounge and Shortlets. Their virtual assistant services have streamlined our reservations, managed customer inquiries efficiently, and allowed our staff to focus more on delivering exceptional dining experiences. It is like having an extra set of hands that’s always available and incredibly reliable. Highly recommend!;",
     },
     {
       name: "RedLens Centre",
       image: Images.RedLenceTestimonialLogo,
       testimonial:
-        "Since hiring WeWorkPerHour virtual assistant services, our co-working hub has seen a huge boost in efficiency. They manage bookings, handle inquiries, and support our members with anything they need. It's like having an extra team member who's always on top of things. Their help has made our workspace run smoother than ever, and we couldn't; to be happier!",
+        "Since hiring Workason virtual assistant services, our co-working hub has seen a huge boost in efficiency. They manage bookings, handle inquiries, and support our members with anything they need. It's like having an extra team member who's always on top of things. Their help has made our workspace run smoother than ever, and we couldn't; to be happier!",
     },
     {
       name: "Bluway Pharmacy",
       image: Images.BluwayTestimonialLogo,
       testimonial:
-        "Partnering with WeWorkPerHour for virtual assistant services has been a tremendous asset to our pharmacy. They handle customer inquiries, manage inventory updates, and assist with scheduling appointments seamlessly. This has allowed our team to focus more on patient care  and less on administrative tasks. Their support has made a noticeable difference in our daily  operations, and we couldn’t be more pleased!",
+        "Partnering with Workason for virtual assistant services has been a tremendous asset to our pharmacy. They handle customer inquiries, manage inventory updates, and assist with scheduling appointments seamlessly. This has allowed our team to focus more on patient care  and less on administrative tasks. Their support has made a noticeable difference in our daily  operations, and we couldn’t be more pleased!",
     },
     {
       name: "Collaborate Africa",
       image: Images.CollaborateAfricaTestimonialLogo,
       testimonial:
-        "Bringing WeWorkPerHour on board for our investor’s club has been a remarkable decision. Their virtual assistant services handle member communications, organize events, and keep track  of important schedules flawlessly. It’s like having a dedicated assistant who understands our  needs perfectly. Their professionalism and efficiency have significantly enhanced our operations,  making everything run smoothly. Highly recommend their services!;",
+        "Bringing Workason on board for our investor’s club has been a remarkable decision. Their virtual assistant services handle member communications, organize events, and keep track  of important schedules flawlessly. It’s like having a dedicated assistant who understands our  needs perfectly. Their professionalism and efficiency have significantly enhanced our operations,  making everything run smoothly. Highly recommend their services!;",
     },
 
     {
       name: "Leverage Prints",
       image: Images.LeveragePrintTestimonialLogo,
       testimonial:
-        "Partnering with WeWorkPerHour for virtual assistant services has been fantastic for our printing and branding business. They've taken over administrative tasks, handled customer orders, and managed our schedule seamlessly. It's freed up our team to concentrate on producing high-quality prints and expanding our services. We';re thrilled with the efficiency and professionalism they bring to the table!;",
+        "Partnering with Workason for virtual assistant services has been fantastic for our printing and branding business. They've taken over administrative tasks, handled customer orders, and managed our schedule seamlessly. It's freed up our team to concentrate on producing high-quality prints and expanding our services. We';re thrilled with the efficiency and professionalism they bring to the table!;",
     },
-    {
-      name: "The 360 Woman",
-      image: Images.TheWomenTestimonialLogo,
-      testimonial:
-        "Working with WeWorkPerHour has transformed our hair and wig service brand. Their virtual assistant services handle our bookings, respond to client inquiries, and manage our social media with such ease and efficiency. Our clients have noticed the difference, and so have we. It has truly helped us elevate our business!",
-    },
+ 
     // Add more testimonials as needed
   ];
 

@@ -147,7 +147,7 @@ const EmployersDashboard = () => {
   ];
 
    return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-4 sm:p-6 lg:p-8">
+    <div className=" lg:ml-64 min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-4 sm:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto mt-20">
         
         {/* Header */}
@@ -256,30 +256,7 @@ const EmployersDashboard = () => {
           </div>
         </div>
 
-        {/* Bottom Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          
-          {/* Top Performing Jobs */}
-
-          {/* Recent Activity */}
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
-            <h2 className="text-xl font-bold text-slate-900 mb-6">Recent Activity</h2>
-            <div className="space-y-4">
-              {recentActivities.map((activity, index) => (
-                <div key={index} className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
-                    {activity.avatar}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-slate-900">{activity.action}</p>
-                    <p className="text-sm text-slate-600 truncate">{activity.job}</p>
-                    <p className="text-xs text-slate-500 mt-1">{activity.candidate} · {activity.time}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+     
 
       </div>
     </div>

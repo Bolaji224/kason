@@ -29,7 +29,7 @@ const SkillStampPage: React.FC = () => {
       {
         icon: <Shield className="w-6 h-6" />,
         title: 'Trust & Credibility',
-        description: "Shows you've been vetted by WeWorkPerHour",
+        description: "Shows you've been vetted by Workason",
         color: 'from-green-400 to-green-500',
       },
       {

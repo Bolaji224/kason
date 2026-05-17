@@ -58,7 +58,7 @@ export default function FreelancerSponsorPlatform() {
   ];
 
   return (
-    <div className="min-h-screen  mt-20 bg-white p-6 lg:ml-64">
+    <div className="min-h-screen mt-20 bg-white p-6">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">

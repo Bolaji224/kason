@@ -60,6 +60,8 @@ const ProfileImageUpload: React.FC = () => {
     try {
       const res = await httpGetWithToken("profile");
       const profileData = res.data ?? {};
+      console.log("Avatar value:", profileData.avatar); // ADD THIS
+      setProfile(profileData);
       setProfile(profileData);
       setFullname(profileData.name ?? "");
       setBio(profileData.bio ?? "");
@@ -99,10 +101,41 @@ const ProfileImageUpload: React.FC = () => {
     }
   };
 
+  const countChars = (text: string) => text.length;
+
+const validate = () => {
+  if (!selected && !profile.avatar) {
+    toast({ status: "error", title: "Please upload a profile photo" });
+    return false;
+  }
+  if (expected_salary && !/^\d+$/.test(expected_salary.trim())) {
+  toast({ status: "error", title: "Expected Salary must contain numbers only" });
+  return false;
+}
+  if (countChars(bio) < 50) {
+    toast({ status: "error", title: "Bio must be at least 50 characters" });
+    return false;
+  }
+  if (!experience.trim()) {
+    toast({ status: "error", title: "Experience is required" });
+    return false;
+  }
+  if (!skills.trim()) {
+    toast({ status: "error", title: "Skills are required" });
+    return false;
+  }
+  if (!education.trim()) {
+    toast({ status: "error", title: "Education is required" });
+    return false;
+  }
+  return true;
+};
+
   //  Update profile details (including new fields)
-  const updateProfile = async () => {
-    if (loading) return;
-    setLoading(true);
+ const updateProfile = async () => {
+  if (loading) return;
+  if (!validate()) return; // 👈 add this line
+  setLoading(true);
     try {
       const fd = new FormData();
       fd.append("name", fullname);
@@ -252,7 +285,7 @@ const ProfileImageUpload: React.FC = () => {
   }, []);
 
   return (
-    <section className="px-2 py-8 max-w-[1100px] mx-auto">
+    <section className=" px-2 py-8 max-w-[1100px] mx-auto">
       <DeleteAction
         onClose={onClose}
         onFinished={getProfile}
@@ -325,16 +358,19 @@ const ProfileImageUpload: React.FC = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block font-semibold text-green-600 text-lg mb-2">
-            Bio*
-          </label>
-          <textarea
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
-            rows={10}
-            className="w-full border rounded-lg p-4"
-          ></textarea>
-        </div>
+  <label className="block font-semibold text-green-600 text-lg mb-2">
+    Bio*
+  </label>
+  <textarea
+    value={bio}
+    onChange={(e) => setBio(e.target.value)}
+    rows={10}
+    className="w-full border rounded-lg p-4"
+  ></textarea>
+  <p className={`text-sm mt-1 ${countChars(bio) < 50 ? "text-red-500" : "text-green-600"}`}>
+    {countChars(bio)} / 50 characters minimum
+  </p>
+</div>
 
         {/* New Fields */}
         <div className="mb-4">
@@ -373,16 +409,25 @@ const ProfileImageUpload: React.FC = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-green-600 font-semibold mb-2">
-            Expected Salary / Budget
-          </label>
-          <input
-            type="text"
-            value={expected_salary}
-            onChange={(e) => setExpectedSalary(e.target.value)}
-            className="w-full border rounded-lg p-2"
-          />
-        </div>
+  <label className="block text-green-600 font-semibold mb-2">
+    Expected Salary / Budget
+  </label>
+  <input
+    type="text"
+    value={expected_salary}
+    onChange={(e) => {
+      const val = e.target.value;
+      if (/[^0-9]/.test(val)) {
+        toast({ status: "warning", title: "Only numbers are accepted", duration: 2000, isClosable: true });
+      }
+      setExpectedSalary(val.replace(/[^0-9]/g, ""));
+    }}
+    className="w-full border rounded-lg p-2"
+    placeholder="e.g. 50000"
+    inputMode="numeric"
+  />
+  <p className="text-xs text-gray-500 mt-1">Enter numbers only (e.g. 50000)</p>
+</div>
 
       <div className="mb-4">
   {profile.smartcv ? (

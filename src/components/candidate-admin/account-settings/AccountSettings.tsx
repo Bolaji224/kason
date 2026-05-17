@@ -88,7 +88,7 @@ const AdminAccountSettings: React.FC = () => {
   };
   
   return (
-    <div className="max-w-[1100px] mx-auto py-16 mt-[4rem] ">
+    <div className="ml-64 max-w-[1100px] mx-auto py-16 mt-[4rem] ">
       <h1 className="text-green-700 text-2xl sm:text-3xl md:text-4xl  mb-4 font-poppins font-semibold">Account Settings</h1>
 
       {/* Account Information Section */}

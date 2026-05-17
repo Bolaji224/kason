@@ -3,7 +3,7 @@ import ChatBox from './components/ChatBox'
 
 const Message: React.FC = () => {
   return (
-    <div className="h-screen w-full mt-[8rem] ml-64"> 
+    <div className="fixed inset-0 top-[8rem] md:left-64">
       <ChatBox />
     </div>
   )

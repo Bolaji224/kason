@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from "react-router-dom";
 import {
   Star,
   Rocket,
@@ -55,6 +56,7 @@ export default function FindJobSection() {
       icon: <Globe2 size={24} color="#1E2A3B" /> // Dark Blue again
     }
   ];
+  const navigate = useNavigate();
 
   return (
     <section className="py-20 bg-gray-50">
@@ -109,12 +111,13 @@ export default function FindJobSection() {
             <p className="text-xl mb-6 opacity-90">
               Join thousands of professionals who trust Workason for their freelancing needs.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.07 }}
-              className="bg-white text-[#1E2A3B] px-8 py-3 rounded-full font-semibold transition duration-300 transform"
-            >
-              Start Your Journey
-            </motion.button>
+           <motion.button
+  whileHover={{ scale: 1.07 }}
+  onClick={() => navigate("/login")}
+  className="bg-white text-[#1E2A3B] px-8 py-3 rounded-full font-semibold transition duration-300 transform"
+>
+  Start Your Journey
+</motion.button>
           </div>
         </motion.div>
       </div>

@@ -13,10 +13,10 @@ const EmployersWalletCard: React.FC<EmployersWalletCardProps> = ({
   profile,
 }) => {
   // Ensure wallet is treated as number
-  const balance = Number(profile?.wallet) || 0;
+  const balance = 0;
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-6 mb-6">
+    <div className="lg:ml-64 bg-white shadow-md rounded-lg p-6 mb-6">
       <h2 className="text-xl font-semibold mb-4">Available Balance</h2>
       <p className="text-3xl font-bold text-green-500">
         N{balance.toLocaleString()}

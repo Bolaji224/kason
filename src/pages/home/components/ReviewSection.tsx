@@ -122,7 +122,7 @@ const ReviewSection: React.FC = () => {
           </h1>
           
           <p className="text-xl text-gray-600 mb-8 font-medium max-w-3xl mx-auto">
-            Real stories from freelancers and clients who've transformed their careers and businesses with WeWorkPerHour.
+            Real stories from freelancers and clients who've transformed their careers and businesses with Workason.
           </p>
 
           {/* Quick Stats */}
@@ -132,11 +132,11 @@ const ReviewSection: React.FC = () => {
               <div className="text-sm text-gray-600">Average Rating</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold bg-gradient-to-r from-green-500 to-green-600 bg-clip-text text-transparent mb-1">2,847</div>
+              <div className="text-3xl font-bold bg-gradient-to-r from-green-500 to-green-600 bg-clip-text text-transparent mb-1">100</div>
               <div className="text-sm text-gray-600">Happy Clients</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-pink-500 bg-clip-text text-transparent mb-1">1,200+</div>
+              <div className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-pink-500 bg-clip-text text-transparent mb-1">150</div>
               <div className="text-sm text-gray-600">Active Freelancers</div>
             </div>
           </div>
@@ -234,7 +234,7 @@ const ReviewSection: React.FC = () => {
               Join Thousands of Satisfied Users
             </h3>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Our community continues to grow with freelancers and clients who trust WeWorkPerHour 
+              Our community continues to grow with freelancers and clients who trust Workason 
               for their professional needs.
             </p>
           </div>

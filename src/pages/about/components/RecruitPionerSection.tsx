@@ -186,8 +186,8 @@ export default function RecruitPionerSection() {
 
     {/* Main Text */}
     <h1 className="text-white text-4xl md:text-6xl font-bold leading-snug max-w-3xl">
-      We love what we do and collaborate every day  
-      hungry to change the world of work
+      We love what we do and collaborate every day,
+       driven to change the world of work
     </h1>
 
   </div>

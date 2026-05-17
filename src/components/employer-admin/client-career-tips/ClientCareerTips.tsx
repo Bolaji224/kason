@@ -49,7 +49,7 @@ const ClientCareerTips: React.FC = () => {
   ];
 
   return (
-    <div className="mt-[8rem] px-[2.5rem]">
+    <div className="lg:ml-64 mt-[8rem] px-[2.5rem]">
       <div className="max-w-7xl mx-auto">
         {/* Tips Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -98,11 +98,9 @@ const ClientCareerTips: React.FC = () => {
             and get access to exclusive resources, mentorship, and opportunities.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/smart-guide">
             <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
               Get SmartGuide™
             </button>
-            </Link>
             <button className="bg-white text-gray-700 font-medium py-3 px-6 rounded-full border border-gray-200 hover:bg-gray-50 transition-all duration-200">
               Browse More Resources
             </button>

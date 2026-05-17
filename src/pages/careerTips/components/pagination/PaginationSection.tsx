@@ -17,7 +17,7 @@ const jobData = [
     {
         sliderImage: Images.CareerCardImageSix,
         sliderTitle: 'Essential Skills for Virtual Assistants',
-        sliderDescription: "To thrive as a virtual assistant, certain skills are indispensable. First, strong communication skills are crucial since you&#39;ll often interact with clients remotely. Excellent organizational abilities help manage multiple tasks and deadlines effectively. Familiarize yourself with common digital tools like Microsoft Office, Google Workspace, and project management software such as Trello or Asana. Time management is also vital; using tools like Calendly or Toggl can help you stay on top of your schedule. Lastly, problem-solving skills and adaptability will enable you to handle unexpected challenges efficiently. Continuously improving these skills will enhance your service quality and client satisfaction."
+        sliderDescription: "To thrive as a virtual assistant, certain skills are indispensable. First, strong communication skills are crucial since you often interact with clients remotely. Excellent organizational abilities help manage multiple tasks and deadlines effectively. Familiarize yourself with common digital tools like Microsoft Office, Google Workspace, and project management software such as Trello or Asana. Time management is also vital; using tools like Calendly or Toggl can help you stay on top of your schedule. Lastly, problem-solving skills and adaptability will enable you to handle unexpected challenges efficiently. Continuously improving these skills will enhance your service quality and client satisfaction."
     },
     {
         sliderImage: Images.CareerCardImageSeven,

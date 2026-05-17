@@ -4,6 +4,7 @@ import SideNav from './side-bar/SideBar';
 import Header from './header/Header';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@chakra-ui/react';
+import { NotificationProvider } from './NotificationContext';
 
 
 interface EmployersLayoutProps { element : any }
@@ -29,6 +30,7 @@ const EmployersLayout: React.FC<EmployersLayoutProps>  = ({element}) => {
   }, [])
   return (
     <div className="min-h-screen w-full flex flex-col bg-[#FFF5F8]">
+      <NotificationProvider>
       <Header />
       <div className="flex flex-1">
         <SideNav />
@@ -38,6 +40,7 @@ const EmployersLayout: React.FC<EmployersLayoutProps>  = ({element}) => {
           </section>
         </main>
       </div>
+      </NotificationProvider>
     </div>
   );
 };

@@ -19,30 +19,23 @@ const EmployerAccountSetting: React.FC = () => {
 
   // ✅ Fetch profile
   const getProfile = async () => {
-    try {
-      const res = await httpGetWithToken('employer/profile');
-      if (res?.status === 'success' && res?.data) {
-        setCompanyName(res.data.name || '');
-        setPhoneNumber(res.data.phone_no || '');
-        updateUser(res.data);
-      } else {
-        toast({
-          status: 'error',
-          title: res?.error || 'Failed to load profile',
-          isClosable: true,
-          duration: 5000,
-        });
-      }
-    } catch (error) {
-      console.error('Profile fetch error:', error);
-      toast({
-        status: 'error',
-        title: 'Error fetching profile',
-        isClosable: true,
-        duration: 5000,
-      });
+  try {
+    const res = await httpGetWithToken('employer/profile');
+    if (res?.data) {
+      setCompanyName(res.data.name || '');
+      setPhoneNumber(res.data.phone_no || '');
+      updateUser(res.data);
     }
-  };
+  } catch (error) {
+    console.error('Profile fetch error:', error);
+    toast({
+      status: 'error',
+      title: 'Error fetching profile',
+      isClosable: true,
+      duration: 5000,
+    });
+  }
+};
 
   useEffect(() => {
     getProfile();
@@ -60,33 +53,17 @@ const EmployerAccountSetting: React.FC = () => {
     };
 
     try {
-      const resp = await httpPostWithToken('employer/profile', fd);
-      if (resp?.status === 'success') {
-        await getProfile();
-        toast({
-          status: 'success',
-          title: 'Profile updated successfully',
-          isClosable: true,
-          duration: 5000,
-        });
-      } else {
-        toast({
-          status: 'error',
-          title: resp?.error || 'Profile update failed',
-          isClosable: true,
-          duration: 5000,
-        });
-      }
+    const resp = await httpPostWithToken('employer/profile', fd);
+if (resp?.data || resp?.status === 'success') {
+  await getProfile();
+  toast({ status: 'success', title: 'Profile updated successfully', isClosable: true, duration: 5000 });
+} else {
+  toast({ status: 'error', title: resp?.error || resp?.message || 'Profile update failed', isClosable: true, duration: 5000 });
+}
     } catch (error) {
       console.error('Profile update error:', error);
-      toast({
-        status: 'error',
-        title: 'Error updating profile',
-        isClosable: true,
-        duration: 5000,
-      });
+      toast({ status: 'error', title: 'Error updating profile', isClosable: true, duration: 5000 });
     }
-
     setLoading(false);
   };
 
@@ -136,7 +113,7 @@ const EmployerAccountSetting: React.FC = () => {
   };
 
   return (
-    <div className="max-w-[1100px] mx-auto py-16 mt-[4rem]">
+    <div className="lg:ml-64 max-w-[1100px] mx-auto py-16 mt-[4rem]">
       <h1 className="text-green-700 text-2xl sm:text-3xl md:text-4xl mb-4 font-poppins font-semibold">
         Account Settings
       </h1>

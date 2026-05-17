@@ -31,7 +31,7 @@ const getToken = (): string => {
 };
 
 // ENV
-const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:8000/api";
+const API_URL = process.env.REACT_APP_API_URL || "https://api.workason.site/api";
 const WS_HOST = process.env.REACT_APP_PUSHER_HOST || "127.0.0.1";
 const WS_PORT = Number(process.env.REACT_APP_PUSHER_PORT) || 6001;
 

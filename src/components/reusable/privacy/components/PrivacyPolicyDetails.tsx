@@ -11,7 +11,7 @@ const PrivacyPolicyDetails = () => {
           Workason Ltd complies with UK GDPR and the Data Protection Act 2018. We collect and process personal data such as names, emails, phone numbers, freelancer profiles, employer details, cookies, and payment information.
           <br />
 Your Rights:
-You may access, update, or delete your data at any time by contacting support@workason.com.
+You may access, update, or delete your data at any time by contacting contact@workason.com.
 
         </p>
         <section className="mb-8">

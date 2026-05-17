@@ -51,7 +51,7 @@ const SmartStartPurpose = () => {
       {
         icon: <LayoutGrid className="w-6 h-6" />,
         title: 'Platform Differentiation',
-        description: 'Differentiates WeWorkPerHour from Fiverr/Upwork',
+        description: 'Differentiate Workason from other freelance platforms',
         color: 'from-pink-400 to-pink-500',
       },
       {

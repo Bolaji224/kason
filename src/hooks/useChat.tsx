@@ -6,6 +6,7 @@ import { echo } from './../utils/echo';
 interface Message {
   id: number;
   message: string;
+  file_url?: string | null; // ✅ added
   user_id: number;
   chat_id: number;
   created_at: string;
@@ -17,6 +18,7 @@ interface Message {
 
 interface SendMessagePayload {
   message: string;
+  file_url?: string | null; // ✅ added
   receiver_id: number;
   chat_id?: number;
 }
@@ -26,13 +28,11 @@ export function useChat(chatId: number | null) {
   const [loading, setLoading] = useState(false);
   const channelRef = useRef<any>(null);
 
-  // Fetch messages
   const fetchMessages = useCallback(async () => {
     if (!chatId) {
       setMessages([]);
       return;
     }
-
     try {
       const resp = await httpGetWithToken(`chat/${chatId}`);
       if (!resp?.error && resp?.data?.messages) {
@@ -43,45 +43,36 @@ export function useChat(chatId: number | null) {
     }
   }, [chatId]);
 
-  // Send message
   const sendMessage = async (payload: SendMessagePayload) => {
-    if (!payload.message.trim()) return null;
-    
+    // ✅ Allow send if there's a message OR a file_url
+    if (!payload.message.trim() && !payload.file_url) return null;
+
     setLoading(true);
     try {
       const resp = await httpPostWithToken("chat/send-chat", payload);
-      
+
       if (!resp?.error && resp?.data) {
-        // Extract the new message from response
         let newMessage: Message | null = null;
-        
-        // Check if response has messages array
+
         if (resp.data.messages && Array.isArray(resp.data.messages)) {
           newMessage = resp.data.messages[resp.data.messages.length - 1];
-        }
-        // Or if response itself is the message
-        else if (resp.data.id) {
+        } else if (resp.data.id) {
           newMessage = resp.data;
         }
-        
-        // Add the new message immediately (optimistic update)
+
         if (newMessage !== null) {
           setMessages((prev): Message[] => {
-            if (!newMessage) return prev; 
+            if (!newMessage) return prev;
             const safeMessage: Message = newMessage;
-        
-            if (prev.some(m => m.id === safeMessage.id)) {
-              return prev;
-            }
-        
+            if (prev.some(m => m.id === safeMessage.id)) return prev;
             return [...prev, safeMessage];
           });
-        }        
-        
+        }
+
         setLoading(false);
         return resp.data;
       }
-      
+
       setLoading(false);
       return null;
     } catch (err) {
@@ -91,14 +82,12 @@ export function useChat(chatId: number | null) {
     }
   };
 
-  // Subscribe to real-time updates
   useEffect(() => {
     if (!chatId) {
       setMessages([]);
       return;
     }
 
-    // Initial fetch
     fetchMessages();
 
     console.log(`🔌 Subscribing to private-chat.${chatId}`);
@@ -106,34 +95,25 @@ export function useChat(chatId: number | null) {
     try {
       channelRef.current = echo.private(`chat.${chatId}`);
 
-      // Listen for new messages from WebSocket
       channelRef.current.listen('.message.sent', (data: any) => {
         console.log('New message received:', data);
-
         setMessages((prev) => {
-          // Prevent duplicates
-          if (prev.some(m => m.id === data.id)) {
-            return prev;
-          }
+          if (prev.some(m => m.id === data.id)) return prev;
           return [...prev, data];
         });
       });
 
-      // Success callback
       channelRef.current.subscribed(() => {
         console.log('Successfully subscribed to chat.' + chatId);
       });
 
-      // Error callback
       channelRef.current.error((error: any) => {
-        console.error(' Channel subscription error:', error);
+        console.error('Channel subscription error:', error);
       });
-
     } catch (err) {
       console.error('Error subscribing to channel:', err);
     }
 
-    // Cleanup
     return () => {
       if (channelRef.current) {
         console.log(`🔌 Unsubscribing from chat.${chatId}`);
@@ -143,10 +123,5 @@ export function useChat(chatId: number | null) {
     };
   }, [chatId, fetchMessages]);
 
-  return {
-    messages,
-    sendMessage,
-    loading,
-    refetch: fetchMessages
-  };
+  return { messages, sendMessage, loading, refetch: fetchMessages };
 }

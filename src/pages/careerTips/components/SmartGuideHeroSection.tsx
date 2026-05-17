@@ -46,7 +46,7 @@ const SmartGuideHeroSection: React.FC = () => {
             {/* Description */}
             <p className="text-lg text-gray-700 mb-8 leading-relaxed">
               SmartGuide is your personalized blueprint to becoming a top-rated
-              freelancer on WeWorkPerHour — with step-by-step guidance based on
+              freelancer on Workason — with step-by-step guidance based on
               your specific category.
             </p>
 
