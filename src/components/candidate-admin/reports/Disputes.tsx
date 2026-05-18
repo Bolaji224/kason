@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { APP_API_URL } from "../../../utils/http_utils";
 import {
   AlertCircle,
   CheckCircle,
@@ -112,12 +113,8 @@ const DisputeResolution: React.FC = () => {
       payload.append("priority", formData.priority);
       formData.attachments.forEach((file) => payload.append("attachments[]", file));
 
-      const BASE_URL =
-        import.meta.env.VITE_API_URL?.replace("/api/v1", "") ||
-        "https://api.workason.site";
-
       const response = await axios.post(
-        `${BASE_URL}/api/v1/dispute/submit`,
+        `${APP_API_URL}/dispute/submit`,
         payload,
         { headers: { "Content-Type": "multipart/form-data" } }
       );

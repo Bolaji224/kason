@@ -60,8 +60,7 @@ const ProfileImageUpload: React.FC = () => {
     try {
       const res = await httpGetWithToken("profile");
       const profileData = res.data ?? {};
-      console.log("Avatar value:", profileData.avatar); // ADD THIS
-      setProfile(profileData);
+      console.log("Avatar value:", profileData.avatar);
       setProfile(profileData);
       setFullname(profileData.name ?? "");
       setBio(profileData.bio ?? "");
@@ -181,19 +180,20 @@ const validate = () => {
     try {
       const resp = await httpPostWithToken("profile", fd);
       if (resp.status === "success") {
+        await getProfile();
         toast({
           status: "success",
           title: "Profile picture updated",
           duration: 5000,
           isClosable: true,
         });
-        getProfile();
+        setImage(null);
+        setSelected(null);
       }
     } catch (err) {
       console.error("Error saving image:", err);
       toast({ status: "error", title: "Failed to save image" });
     } finally {
-      setImage(null);
       setSaveLoading(false);
     }
   };
