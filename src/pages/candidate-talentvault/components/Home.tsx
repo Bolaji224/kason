@@ -39,6 +39,8 @@ const DEMO_TALENTS = [
     initials: "AM",
     color: "from-rose-900/40 to-pink-800/20",
     image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&q=80",
+    rating: 4.8,
+    reviewCount: 23,
   },
   {
     id: 2,
@@ -52,7 +54,9 @@ const DEMO_TALENTS = [
     experience: "3 years",
     initials: "KA",
     color: "from-violet-900/40 to-purple-800/20",
-     image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80",
+    rating: 4.6,
+    reviewCount: 11,
   },
   {
     id: 3,
@@ -67,6 +71,8 @@ const DEMO_TALENTS = [
     initials: "NC",
     color: "from-cyan-900/40 to-sky-800/20",
     image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80",
+    rating: 0,
+    reviewCount: 0,
   },
   {
     id: 4,
@@ -81,6 +87,8 @@ const DEMO_TALENTS = [
     initials: "MT",
     color: "from-amber-900/40 to-orange-800/20",
     image: "https://images.unsplash.com/photo-1574717024453-354056aafa98?w=400&q=80",
+    rating: 4.9,
+    reviewCount: 41,
   },
 ];
 
@@ -432,6 +440,21 @@ export default function TalentVaultPage() {
                           </span>
                         ))}
                       </div>
+
+                      {/* Rating badge — hidden when no reviews */}
+                      {talent.reviewCount > 0 && (
+                        <div className="flex items-center gap-1.5">
+                          <span className="inline-flex items-center gap-1.5 bg-amber-400/10 border border-amber-400/25 px-2.5 py-1 rounded-full">
+                            <span className="text-amber-400 text-xs leading-none">★</span>
+                            <span className="text-amber-300 text-xs font-semibold leading-none">
+                              {talent.rating.toFixed(1)}
+                            </span>
+                            <span className="text-amber-400/60 text-[11px] leading-none">
+                              ({talent.reviewCount})
+                            </span>
+                          </span>
+                        </div>
+                      )}
 
                       {/* Divider + verified */}
                       <div className="pt-1 border-t border-border/40 flex items-center justify-between">

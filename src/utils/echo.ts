@@ -2,6 +2,7 @@
 import Echo from "laravel-echo";
 import Pusher from "pusher-js";
 import ls from "localstorage-slim";
+import { APP_API_URL } from "./http_utils";
 
 (window as any).Pusher = Pusher;
 
@@ -30,8 +31,8 @@ const getToken = (): string => {
   return "";
 };
 
-// ENV
-const API_URL = process.env.REACT_APP_API_URL || "https://api.workason.site/api";
+// ENV — strip /v1 so we get the base /api path used by the auth endpoint
+const API_URL = APP_API_URL.replace("/v1", "");
 const WS_HOST = process.env.REACT_APP_PUSHER_HOST || "127.0.0.1";
 const WS_PORT = Number(process.env.REACT_APP_PUSHER_PORT) || 6001;
 

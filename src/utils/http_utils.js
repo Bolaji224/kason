@@ -2,7 +2,7 @@ import axios from "axios";
 import _ from "lodash";
 import ls from "localstorage-slim";
 export const APP_API_URL = window.location.host.includes("localhost")
-? "https://api.workason.site/api/v1"
+? "http://localhost:8000/api/v1"
 : "https://api.workason.site/api/v1";
 export const validatePasswordRegex =
   // /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;

@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import Images from "../constant/Images";
-import { httpPostWithoutToken, validateEmail } from "../../utils/http_utils";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
+import Images from "../constant/Images";
+import { httpPostWithoutToken, validateEmail, APP_API_URL } from "../../utils/http_utils";
+
+const WEB_BASE_URL = APP_API_URL.replace("/api/v1", "");
+
 
 const AccountVerification: React.FC = () => {
   const [code, setCode] = useState("");
@@ -33,7 +36,7 @@ const AccountVerification: React.FC = () => {
    // Call Laravel backend to verify email
    const verifyEmail = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/email/verify/${id}/${hash}`, {
+      const response = await fetch(`${WEB_BASE_URL}/email/verify/${id}/${hash}`, {
         method: "GET",
         headers: {
           "Accept": "application/json",

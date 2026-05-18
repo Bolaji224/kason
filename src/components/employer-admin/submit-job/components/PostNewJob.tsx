@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
-import ls from 'localstorage-slim';
+import { httpGetWithToken, httpPostWithToken } from "../../../../utils/http_utils";
 
 const AngleDownIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -13,45 +13,6 @@ const AngleUpIcon = () => (
     <polyline points="18 15 12 9 6 15"></polyline>
   </svg>
 );
-
-const API_BASE_URL = "https://api.workason.site/api/v1/";
-
-// ✅ Real GET with token — no longer mocked
-const httpGetWithToken = async (url: string) => {
-  try {
-    const token = ls.get("wwph_token", { decrypt: true });
-    const res = await axios.get(`${API_BASE_URL}${url}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/json",
-      },
-    });
-    return res.data;
-  } catch (err: any) {
-    console.error("GET error:", err.response?.data || err.message);
-    return { status: "error", data: null };
-  }
-};
-
-const httpPostWithToken = async (url: string, data: any) => {
-  try {
-    const token = ls.get("wwph_token", { decrypt: true });
-    if (!token) {
-      console.error("No token found");
-      return { status: "error", message: "Authentication required" };
-    }
-    const res = await axios.post(`${API_BASE_URL}${url}`, data, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/json",
-      },
-    });
-    return res.data;
-  } catch (err: any) {
-    console.error("POST error:", err.response?.data || err.message);
-    return { status: "error", message: "Failed to connect to backend" };
-  }
-};
 
 const jobSalary = ["Monthly", "Weekly", "Hourly"];
 
