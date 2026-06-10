@@ -180,7 +180,7 @@ const ApprovedCandidatesPage: React.FC = () => {
                 <p>
                   💰 Expected Salary:{" "}
                   <span className="font-medium">
-                    ₦{a.user?.expected_salary || "Negotiable"}
+                    £{a.user?.expected_salary || "Negotiable"}
                   </span>
                 </p>
                 <p>

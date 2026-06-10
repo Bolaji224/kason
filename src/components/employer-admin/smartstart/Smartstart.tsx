@@ -1,6 +1,7 @@
 import { useState, ChangeEvent } from "react";
 import { usePaystackPayment } from "react-paystack";
 import ls from 'localstorage-slim';
+import { APP_API_URL } from "../../../utils/http_utils";
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -84,10 +85,10 @@ const PROJECT_TYPES: string[] = [
 ];
 
 const BUDGET_PRESETS: BudgetPreset[] = [
-  { label: "₦50k–100k", min: "50000", max: "100000" },
-  { label: "₦100k–250k", min: "100000", max: "250000" },
-  { label: "₦250k–500k", min: "250000", max: "500000" },
-  { label: "₦500k+", min: "500000", max: "" },
+  { label: "£50–100", min: "50", max: "100" },
+  { label: "£100–250", min: "100", max: "250" },
+  { label: "£250–500", min: "250", max: "500" },
+  { label: "£500+", min: "500", max: "" },
 ];
 
 const STEPS: string[] = ["Project", "Budget", "Files", "Review"];
@@ -161,7 +162,7 @@ export default function SmartStart(): JSX.Element {
     form.files.forEach((file) => { formData.append("files[]", file); });
 
     const token = ls.get("wwph_token", { decrypt: true });
-    await fetch(`${process.env.REACT_APP_API_URL}/employer/smartstart`, {
+    await fetch(`${APP_API_URL}/employer/smartstart`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
       body: formData,
@@ -355,7 +356,7 @@ function StepBudget({ form, set, onNext, onBack }: StepBudgetProps): JSX.Element
       <Card label="Budget & timeline">
         <Field label="Budget range">
           <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-400 shrink-0">₦</span>
+            <span className="text-sm text-gray-400 shrink-0">£</span>
             <input
               className="w-full text-sm text-gray-800 bg-stone-100 border border-stone-200 rounded-lg px-3 py-2 outline-none focus:border-emerald-500 transition-colors"
               type="number"
@@ -387,11 +388,11 @@ function StepBudget({ form, set, onNext, onBack }: StepBudgetProps): JSX.Element
               </button>
             ))}
           </div>
-          {form.budgetPreset === "₦500k+" && (
+          {form.budgetPreset === "£500+" && (
             <div className="mt-3">
               <label className="block text-xs font-medium text-gray-500 mb-1.5">Your max budget (optional)</label>
               <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-400 shrink-0">₦</span>
+                <span className="text-sm text-gray-400 shrink-0">£</span>
                 <input
                   className="w-full text-sm text-gray-800 bg-stone-100 border border-stone-200 rounded-lg px-3 py-2 outline-none focus:border-emerald-500 transition-colors"
                   type="number"
@@ -490,7 +491,7 @@ function StepFiles({ form, set, handleFileChange, onNext, onBack }: StepFilesPro
 function StepReview({ form, set, onBack, onSubmit, isLoading }: StepReviewProps): JSX.Element {
   const budget =
     form.budgetMin || form.budgetMax
-      ? `₦${Number(form.budgetMin || 0).toLocaleString()} – ₦${Number(form.budgetMax || 0).toLocaleString()}`
+      ? `£${Number(form.budgetMin || 0).toLocaleString()} – £${Number(form.budgetMax || 0).toLocaleString()}`
       : "Not specified";
 
   const rows: [string, string][] = [

@@ -86,7 +86,7 @@ export const seedGuides: GuideBlock[] = [
       "Join 3 Facebook/LinkedIn groups for VA opportunities.",
     ],
     pricingPackages: [
-      "Start low to build a portfolio (e.g., £5–$10/hour or ₦5,000–₦8,000/hour).",
+      "Start low to build a portfolio (e.g., £5–£10/hour).",
       "Offer fixed packages (10 hours/month basic admin support).",
     ],
     toolsTemplates: ["Google Workspace, Zoom, Canva.", "Starter templates: task tracker, basic invoice."],
@@ -108,7 +108,7 @@ export const seedGuides: GuideBlock[] = [
       "Target high-paying clients on LinkedIn, via cold outreach, and premium platforms.",
       "Leverage referrals and testimonials from past work.",
     ],
-    pricingPackages: ["$20–$40/hour (₦15,000–₦25,000/hour).", "Offer premium retainers (40+ hours/month)."],
+    pricingPackages: ["£20–£40/hour.", "Offer premium retainers (40+ hours/month)."],
     toolsTemplates: [
       "Asana, Notion, Zapier integrations, and advanced Canva branding kits.",
       "Templates: client onboarding forms, SOP guides, multi-project trackers.",
@@ -127,7 +127,7 @@ export const seedGuides: GuideBlock[] = [
       "Target LinkedIn, Workason, student networks.",
       "Offer free sample edits (up to 500 words) to attract first clients.",
     ],
-    pricingPackages: ["$5–$10 per 1,000 words (₦5,000–₦8,000).", "Bundle: edit + basic formatting."],
+    pricingPackages: ["£5–£10 per 1,000 words.", "Bundle: edit + basic formatting."],
     toolsTemplates: ["Grammarly, Google Docs.", "Style guide checklist (APA, Chicago)."],
     serviceStandards: ["24–48 hour turnaround for small jobs.", "One free revision included."],
     quickWins: [

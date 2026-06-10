@@ -133,7 +133,7 @@ const CandidateDetailModal: React.FC<CandidateModalProps> = ({ candidate, onClos
             </div>
             <div className="text-center border-x border-gray-100">
               <p className="text-xl font-bold text-gray-800">
-                {candidate.expected_salary ? `₦${Number(candidate.expected_salary).toLocaleString()}` : "—"}
+                {candidate.expected_salary ? `£${Number(candidate.expected_salary).toLocaleString()}` : "—"}
               </p>
               <p className="text-xs text-gray-400 mt-0.5">Salary / hr</p>
             </div>
@@ -356,7 +356,7 @@ const CandidateCard: React.FC<{
           <p className="flex items-center gap-1.5">
             <DollarSign size={12} className="text-gray-400 flex-shrink-0" />
             {candidate.expected_salary
-              ? `₦${Number(candidate.expected_salary).toLocaleString()} / hr`
+              ? `£${Number(candidate.expected_salary).toLocaleString()} / hr`
               : "Rate not set"}
           </p>
           <p className="flex items-center gap-1.5">

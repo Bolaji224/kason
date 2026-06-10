@@ -72,7 +72,7 @@ const FindJobCardSection: React.FC<FindJobCardSectionProps> = ({
        
         <p className="text-[12px] mt-[0.5rem] text-[#646A73] font-sans font-semilight tracking-[0.5px]">{jobDescription}</p>
         <div className='mt-[2rem] flex justify-center space-x-[4rem]'>
-        <p className="text-[#ee009d] mt-[0.5rem] text-[12px] font-sans font-semibold">₦{payment.toLocaleString()}<span className='text-[12px] text-[#2aa100]'>/month</span></p>
+        <p className="text-[#ee009d] mt-[0.5rem] text-[12px] font-sans font-semibold">£{payment.toLocaleString()}<span className='text-[12px] text-[#2aa100]'>/month</span></p>
       <Link to={"/job-details/"+slug}>
       <button className="font-sans text-xs font-medium text-[#ee009d] border-[1.5px] hover:border-[#2aa100] border-[#ee009d] hover:text-[#2aa100] py-2 px-3 rounded-md whitespace-nowrap">Apply Now</button>
             </Link>

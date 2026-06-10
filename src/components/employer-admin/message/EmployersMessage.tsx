@@ -209,7 +209,7 @@ export default function EmployersMessage() {
                 <h3 className="text-xl font-bold text-gray-900 text-center">STANDARD</h3>
                 <div className="text-center mt-2">
                   <span className="text-2xl font-bold" style={{ color: '#2aa100' }}>
-                    $49
+                    £49
                   </span>
                   <span className="text-gray-500">/month</span>
                 </div>
@@ -230,7 +230,7 @@ export default function EmployersMessage() {
               >
                 <h3 className="text-xl font-bold text-gray-900 text-center mt-4">PREMIUM</h3>
                 <div className="text-center mt-2">
-                  <span className="text-2xl font-bold text-pink-600">$99</span>
+                  <span className="text-2xl font-bold text-pink-600">£99</span>
                   <span className="text-gray-500">/month</span>
                 </div>
               </div>
