@@ -37,6 +37,7 @@ const EmployerProfile: React.FC = () => {
   const [selected, setSelected] = useState<File | null>(null);
   const [links, setLinks] = useState<iSocial[]>([]);
   const [countries, setCountries] = useState<any[]>([]);
+  const [states, setStates] = useState<any[]>([]);
   const [editing_link, setEditingLink] = useState<string>("");
   const [newLink, setNewLink] = useState<string>("");
   const [newLinkValue, setNewLinkValue] = useState<string>("");
@@ -48,6 +49,14 @@ const EmployerProfile: React.FC = () => {
     getProfile();
     getCountries();
   }, []);
+
+  useEffect(() => {
+    if (profile.country) {
+      getStates(profile.country);
+    } else {
+      setStates([]);
+    }
+  }, [profile.country]);
 
   const getProfile = async () => {
     try {
@@ -97,9 +106,32 @@ const validate = () => {
     }
   };
 
+  const getStates = async (countryCode: string) => {
+    if (!countryCode) {
+      setStates([]);
+      return;
+    }
+    try {
+      const res = await httpGetWithoutToken(`countries/${countryCode}`);
+      const items: any[] = Array.isArray(res)
+        ? res
+        : Array.isArray(res?.data)
+        ? res.data
+        : [];
+      setStates(items);
+    } catch (error) {
+      console.error("Failed to fetch states:", error);
+      setStates([]);
+    }
+  };
+
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
-    setProfile((prev) => ({ ...prev, [id]: value }));
+    if (id === "country") {
+      setProfile((prev) => ({ ...prev, country: value, state: "" }));
+    } else {
+      setProfile((prev) => ({ ...prev, [id]: value }));
+    }
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -291,15 +323,14 @@ const validate = () => {
           <div className="flex flex-wrap -mx-2">
             {/* Website */}
             <div className="w-full px-2 mb-8">
-              <label className="block text-gray-700 font-bold mb-2">Website*</label>
+              <label className="block text-gray-700 font-bold mb-2">Website</label>
               <input
-                type="url"
+                type="text"
                 id="website"
                 value={profile.website ?? ""}
                 onChange={handleChange}
-                placeholder="https://example.com"
+                placeholder="www.example.com"
                 className="w-full p-4 border border-gray-300 rounded-md shadow-sm focus:ring-0 focus:outline-none"
-                required
               />
             </div>
 
@@ -377,14 +408,28 @@ const validate = () => {
             {/* State */}
             <div className="w-full sm:w-1/2 px-2 mb-8">
               <label className="block text-gray-700 font-bold mb-2">State</label>
-              <input
-                type="text"
-                id="state"
-                value={profile.state ?? ""}
-                onChange={handleChange}
-                placeholder="Enter your state"
-                className="w-full p-4 border border-gray-300 rounded-md shadow-sm focus:ring-0 focus:outline-none"
-              />
+              {states.length > 0 ? (
+                <select
+                  id="state"
+                  value={profile.state ?? ""}
+                  onChange={handleChange}
+                  className="w-full p-4 border border-gray-300 rounded-md shadow-sm focus:ring-0 focus:outline-none"
+                >
+                  <option value="">Select State</option>
+                  {states.map((s) => (
+                    <option key={s.id} value={s.name}>{s.name}</option>
+                  ))}
+                </select>
+              ) : (
+                <input
+                  type="text"
+                  id="state"
+                  value={profile.state ?? ""}
+                  onChange={handleChange}
+                  placeholder="Enter your state"
+                  className="w-full p-4 border border-gray-300 rounded-md shadow-sm focus:ring-0 focus:outline-none"
+                />
+              )}
             </div>
 
             {/* City */}

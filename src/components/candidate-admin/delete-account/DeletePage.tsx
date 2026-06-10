@@ -8,24 +8,27 @@ export default function FreelancerSponsorPlatform() {
   const plans = [
     {
       id: 'starter',
-      price: 'N15,000/month',
-      title: 'Starter Plan',
-      subtitle: 'StartStark 6 months subscription',
-      features: ['Basic support', 'Monthly reports', 'Email updates']
+      price: '£15/month',
+      title: 'Workason Sponsor 1',
+      subtitle: 'SmartStart 6 months subscription',
+      features: ['Basic support', 'Monthly reports', 'Email updates'],
+      link: 'https://wise.com/pay/r/T2jWRBKW-wd3FFs'
     },
     {
       id: 'premium',
-      price: 'N30,000/month',
-      title: 'Premium Plan',
+      price: '£30/month',
+      title: 'Workason Sponsor 2',
       subtitle: 'Course bundle',
-      features: ['Priority support', 'Weekly reports', 'Phone support']
+      features: ['Priority support', 'Weekly reports', 'Phone support'],
+      link: 'https://wise.com/pay/r/D30qWrSuSzgE29E'
     },
     {
       id: 'custom',
-      price: 'Custom Plan',
+      price: 'Custom',
       title: 'Enterprise',
       subtitle: 'Tailored Plan & Frequency',
-      features: ['24/7 support', 'Daily reports', 'Dedicated manager']
+      features: ['24/7 support', 'Daily reports', 'Dedicated manager'],
+      link: null
     }
   ];
 
@@ -65,12 +68,15 @@ export default function FreelancerSponsorPlatform() {
           <h1 className="text-4xl font-bold mb-4" style={{ color: '#2AA100' }}>
             Empower a Freelancer. Change a Life.
           </h1>
-          <button 
-            className="px-6 py-3 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+          <a
+            href="https://wise.com/pay/r/T2jWRBKW-wd3FFs"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-6 py-3 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-shadow"
             style={{ backgroundColor: '#EE009D' }}
           >
-            Sponsor Now (N15,000 monthly)
-          </button>
+            Sponsor Now (from £15/month)
+          </a>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -86,13 +92,16 @@ export default function FreelancerSponsorPlatform() {
                   <div
                     key={plan.id}
                     className={`p-6 rounded-lg border-2 cursor-pointer transition-all hover:shadow-lg ${
-                      selectedPlan === plan.id 
-                        ? 'border-[#2AA100] bg-green-50' 
+                      selectedPlan === plan.id
+                        ? 'border-[#2AA100] bg-green-50'
                         : 'border-gray-200 hover:border-[#2AA100]'
                     }`}
-                    onClick={() => setSelectedPlan(plan.id)}
+                    onClick={() => {
+                      setSelectedPlan(plan.id);
+                      if (plan.link) window.open(plan.link, '_blank', 'noopener,noreferrer');
+                    }}
                   >
-                    <h3 className="font-bold text-lg mb-2">{plan.price}</h3>
+                    <h3 className="font-bold text-lg mb-2" style={{ color: '#EE009D' }}>{plan.price}</h3>
                     <h4 className="font-semibold mb-1">{plan.title}</h4>
                     <p className="text-gray-600 text-sm mb-4">{plan.subtitle}</p>
                     <ul className="text-sm text-gray-600">
@@ -100,6 +109,9 @@ export default function FreelancerSponsorPlatform() {
                         <li key={index} className="mb-1">• {feature}</li>
                       ))}
                     </ul>
+                    {plan.link && (
+                      <p className="text-xs text-blue-500 mt-3">Click to sponsor →</p>
+                    )}
                   </div>
                 ))}
               </div>
@@ -153,9 +165,13 @@ export default function FreelancerSponsorPlatform() {
                         </div>
                         <p className="text-gray-600 text-sm mb-3">{freelancer.location}</p>
                         <p className="text-sm mb-4">{freelancer.description}</p>
-                        <button 
+                        <button
                           className="w-full py-2 text-white font-semibold rounded-lg transition-colors hover:opacity-90"
                           style={{ backgroundColor: '#2AA100' }}
+                          onClick={() => {
+                            const plan = plans.find(p => p.id === selectedPlan);
+                            if (plan?.link) window.open(plan.link, '_blank', 'noopener,noreferrer');
+                          }}
                         >
                           Sponsor Now
                         </button>

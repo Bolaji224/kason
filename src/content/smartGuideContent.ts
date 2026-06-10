@@ -15,7 +15,7 @@ export const smartGuideContent: Record<SmartGuideKey, string> = {
   • Join 3 Facebook/LinkedIn groups for VA opportunities.
 
   Pricing & Packages:
-  • Start low to build a portfolio (e.g., £5–$10/hour or ₦5,000–₦8,000/hour).
+  • Start low to build a portfolio (e.g., £5–£10/hour).
   • Offer fixed packages (10 hours/month basic admin support).
 
   Tools & Templates:

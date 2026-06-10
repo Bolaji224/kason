@@ -25,7 +25,7 @@ export const module1Questions: Question[] = [
     id: 2,
     question:
       "A virtual assistant can charge between ___ per hour depending on skill and service level.",
-    options: ["$1–$10", "$5–$300", "$50–$500", "$3–$30"],
+    options: ["£1–£10", "£5–£300", "£50–£500", "£3–£30"],
     answer: 1
   },
   {

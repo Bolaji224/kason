@@ -170,7 +170,7 @@ const ApplicantDetailModal: React.FC<DetailModalProps> = ({
             <div className="text-center border-x border-gray-100">
               <p className="text-xl font-bold text-gray-800">
                 {u.expected_salary
-                  ? `₦${Number(u.expected_salary).toLocaleString()}`
+                  ? `£${Number(u.expected_salary).toLocaleString()}`
                   : "—"}
               </p>
               <p className="text-xs text-gray-400 mt-0.5">Salary / hr</p>
@@ -454,7 +454,7 @@ const ApplicantCard: React.FC<CardProps> = ({
             <p className="flex items-center gap-1.5">
               <DollarSign size={12} className="text-gray-400 flex-shrink-0" />
               {u.expected_salary
-                ? `₦${Number(u.expected_salary).toLocaleString()} / hr`
+                ? `£${Number(u.expected_salary).toLocaleString()} / hr`
                 : "Rate not set"}
             </p>
             {u.completed_jobs != null && (
