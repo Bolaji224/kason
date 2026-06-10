@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import { UilEnvelope } from '@iconscout/react-unicons';
 import { FaWhatsapp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useCMS } from '../../hooks/useCMS';
 
 const FooterSection: React.FC = () => {
   const { ref, inView } = useInView({
@@ -15,6 +16,7 @@ const FooterSection: React.FC = () => {
     threshold: 0.1,
   });
   const navigate = useNavigate();
+  const { footer } = useCMS();
 
   // const location = useLocation()
   // let currentPath = location.pathname
@@ -57,7 +59,7 @@ const FooterSection: React.FC = () => {
 
   <li className='flex items-center gap-2 text-[#1E2A38]'>
     <UilEnvelope size={30} className="rounded-full" color="#0a2414" />
-    contact@workason.com
+    {footer.support_email}
   </li>
 
   <li className='flex items-center gap-2 text-[#1E2A38]'>
@@ -123,7 +125,7 @@ const FooterSection: React.FC = () => {
     <div className='xl:max-w-[1200px] lg:max-w-[900px] mx-auto border-[1px] border-[#f2fcef] mt-[-4rem]'/>
     <section className='flex lg:flex-row xl:flex-row flex-col-reverse md:flex justify-center xl:gap-[20rem] lg:gap-[4rem] py-[4rem] lg:px-0 px-[2rem]'>
 
-      <p className='text-sm md:text-base sm:mb-0 lg:mt-0 xl:mt-0 mt-[2rem] text-white'>@Copyright Workason 2025. All rights reserved.</p>
+      <p className='text-sm md:text-base sm:mb-0 lg:mt-0 xl:mt-0 mt-[2rem] text-white'>{footer.copyright_text}</p>
       <div className='lg:flex xl:gap-[4rem] lg:gap-[2rem] justify-center lg:space-y-0 space-y-[2rem]'> 
        <Link to="/privacy-policy">
        <h2 className='text-white text-[14px] md:text-lg font-semibold'>Privacy Policy</h2>

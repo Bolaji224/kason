@@ -25,6 +25,7 @@ import {
 import { httpGetWithToken } from "../../utils/http_utils";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../global/state";
+import { useCMS } from "../../hooks/useCMS";
 
 /* ---------------------------
    Types
@@ -113,6 +114,7 @@ const ProfileSetupModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
 const CandidateDashboard: React.FC = () => {
   const navigate = useNavigate();
   const { user }: any = useContext(AppContext);
+  const { candidateDashboard } = useCMS();
 
   const [appliedJobs, setAppliedJobs] = useState<AppliedJob[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -187,7 +189,7 @@ const CandidateDashboard: React.FC = () => {
 
   const stats: StatCard[] = [
     {
-      title: "Applications Sent",
+      title: candidateDashboard.applied_jobs_label,
       value: totalApplications,
       change: "",
       trend: "",
@@ -195,7 +197,7 @@ const CandidateDashboard: React.FC = () => {
       icon: <FileText size={24} />,
     },
     {
-      title: "Profile Views",
+      title: candidateDashboard.profile_strength_label,
       value: "—",
       change: "+28 today",
       trend: "up",
@@ -203,7 +205,7 @@ const CandidateDashboard: React.FC = () => {
       icon: <Eye size={24} />,
     },
     {
-      title: "Saved Jobs",
+      title: candidateDashboard.saved_jobs_label,
       value: "—",
       change: "+3 new matches",
       trend: "up",
@@ -236,7 +238,7 @@ const CandidateDashboard: React.FC = () => {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-2">
-                Welcome Back, {user?.name ?? "Candidate"}!
+                {candidateDashboard.welcome_text}, {user?.name ?? "Candidate"}!
               </h1>
               <p className="text-slate-600 flex items-center gap-2">
                 <Calendar className="text-blue-500" size={18} />
