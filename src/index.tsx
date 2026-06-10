@@ -2,22 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react';
 import AppStateProvider from './global/state';
 import { JobNotificationProvider } from './components/job-alert-system/JobNotificationContext';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   // <React.StrictMode>
-  <AppStateProvider>
-    <ChakraProvider>
-      <JobNotificationProvider>
-    <App />
-    </JobNotificationProvider>
-    </ChakraProvider>
+  <Provider store={store}>
+    <AppStateProvider>
+      <ChakraProvider>
+        <JobNotificationProvider>
+          <App />
+        </JobNotificationProvider>
+      </ChakraProvider>
     </AppStateProvider>
+  </Provider>
   // </React.StrictMode>
 );
 

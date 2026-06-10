@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useToast } from '@chakra-ui/react';
 import { useInView } from 'react-intersection-observer';
 import { httpPostWithoutToken } from '../../../utils/http_utils';
+import { useCMS } from '../../../hooks/useCMS';
 import { Link } from 'react-router-dom';
 
 const ComeJoinUsSection: React.FC = () => {
@@ -12,6 +13,7 @@ const ComeJoinUsSection: React.FC = () => {
   const [subscribed, setSubscribed] = useState(false);
   const toast = useToast();
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
+  const { footer } = useCMS();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,19 +50,12 @@ const ComeJoinUsSection: React.FC = () => {
       <section className="lg:flex md:flex gap-[4rem] justify-center items-center p-[2.5rem]">
         <div>
           <h2 className="lg:text-[38px] md:text-[24px] text-[20px] mt-[1rem] font-sans font-semibold tracking-[1px]">
-            Come join us and don't miss our latest{" "}
-            <Link to="/find-job">
-              <span className="text-[#ee009d]">job vacancies</span>
-            </Link>
+            {footer.newsletter_title}
           </h2>
         </div>
         <div>
           <p className="lg:text-[14px] md:text-[14px] text-[10px] text-[#646A73] font-sans font-normal mt-[0.5rem]">
-            By subscribing to our newsletter, you're taking a smart step toward
-            transforming your job search. Stay informed with valuable tips, the
-            latest opportunities, and insights that make finding your next role
-            faster, easier, and more transparent. Join us today and be the first
-            to get updates that empower your career.
+            {footer.newsletter_subtitle}
           </p>
 
           {/* ✅ Show success message after subscribing */}

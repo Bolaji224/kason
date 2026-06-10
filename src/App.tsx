@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "./store";
+import { setCMS, setCMSLoading, setCMSError } from "./store/slices/cmsSlice";
+import { fetchCMSSettings } from "./services/cmsService";
 import {
   BrowserRouter as Router,
   Routes,
@@ -87,6 +91,7 @@ import BrowseCandidates from "./components/employer-admin/browse-candidates/Brow
 import Smartstart from "./components/employer-admin/smartstart/Smartstart";
 import ContactUs from "./components/reusable/contact/Contact";
 import CookieBanner from "./components/CookieBanner";
+import AnnouncementBanner from "./components/AnnouncementBanner";
 import EmployersWalletPage from "./components/employer-admin/employers-payment-account/components/EmployersWalletPage";
 import { iProfileCompany } from "./models/profle";
 import DisputeResolution from "./components/candidate-admin/reports/Disputes";
@@ -104,22 +109,44 @@ import CookiePrivacyModal from "./pages/cookie-policy/Policy";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleLoginSuccess = () => setIsLoggedIn(true);
 
+  // Seed SmartGuide content into localStorage on first load (pre-existing).
   useEffect(() => {
     seedGuidesIfEmpty();
   }, []);
 
+  // Bootstrap CMS: serve from localStorage cache instantly, then fetch
+  // fresh data from the API in the background. If the API is unavailable
+  // the slice keeps its defaults — no blank screens, no crashes.
+  useEffect(() => {
+    const bootstrapCMS = async () => {
+      dispatch(setCMSLoading());
+      const result = await fetchCMSSettings();
+      if (result.data) {
+        dispatch(setCMS(result.data));
+      } else {
+        // Log only in development — not a fatal error for the user.
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('[CMS] Could not load CMS settings:', result.error);
+        }
+        dispatch(setCMSError(result.error ?? 'CMS unavailable'));
+      }
+    };
+    bootstrapCMS();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Run once on mount — dispatch is stable and never changes.
+
   return (
     <Router>
-  
-    <ScrollToTop />
-    <Loader />
-    <Main isLoggedIn={isLoggedIn} handleLoginSuccess={handleLoginSuccess} />
-    <CookieBanner />
-  
-</Router>
+      <ScrollToTop />
+      <Loader />
+      <Main isLoggedIn={isLoggedIn} handleLoginSuccess={handleLoginSuccess} />
+      <CookieBanner />
+      <AnnouncementBanner />
+    </Router>
 
   );
 }

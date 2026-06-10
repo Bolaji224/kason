@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { User, Briefcase, TrendingUp, Eye, Calendar, MoreVertical, ChartLine } from 'lucide-react';
+import { useCMS } from '../../../hooks/useCMS';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { httpGetWithToken } from '../../../utils/http_utils';
 
 const EmployersDashboard = () => {
+  const { employerDashboard } = useCMS();
   const [loading, setLoading] = useState(true);
 
   // Stats data
@@ -52,28 +54,28 @@ const EmployersDashboard = () => {
   // Chart data
   const statsCards = [
     {
-      title: "Active Jobs",
+      title: employerDashboard.active_jobs_label,
       value: stats.active_jobs,
       change: "+ Updated",
       color: "from-purple-500 to-pink-500",
       icon: <Briefcase size={24} />,
     },
     {
-      title: "New Applicants",
+      title: employerDashboard.new_applicants_label,
       value: stats.new_applicants,
       change: "+ Today",
       color: "from-emerald-500 to-teal-500",
       icon: <User size={24} />,
     },
     {
-      title: "Profile Views",
+      title: employerDashboard.profile_views_label,
       value: stats.profile_views,
       change: "Updated",
       color: "from-blue-500 to-cyan-500",
       icon: <Eye size={24} />,
     },
     {
-      title: "Engagement Rate",
+      title: employerDashboard.engagement_label,
       value: stats.engagement_rate + "%",
       change: "Based on activity",
       color: "from-amber-500 to-orange-500",
