@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
 import { httpGetWithToken, httpPostWithToken } from "../../../../utils/http_utils";
+import { useCMS } from "../../../../hooks/useCMS";
 
 const AngleDownIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -37,6 +38,7 @@ const fallbackWorkTypes = [
 ];
 
 const PostNewJob: React.FC = () => {
+  const { employerDashboardPostJob: cms } = useCMS();
   const [skills, setSkills] = useState<string[]>([]);
   const [job_types, setJobTypes] = useState<any[]>([]);
   const [work_types, setWorktypes] = useState<any[]>([]);
@@ -212,28 +214,28 @@ const getResources = () => {
     <>
       <section className="lg:ml-64 p-8 mt-[4rem]">
         <h2 className="text-green-700 text-2xl sm:text-3xl md:text-4xl font-poppins font-semibold">
-          Post a New Job
+          {cms.page_heading}
         </h2>
 
         {/* Job Details */}
         <div className="bg-white p-[4rem] rounded-[20px] shadow-md mb-6 mt-[2rem]">
-          <h3 className="text-[24px] font-semibold text-[#EE009D] mb-4">Job Details</h3>
+          <h3 className="text-[24px] font-semibold text-[#EE009D] mb-4">{cms.job_details_section}</h3>
           <div>
             <div className="mb-4">
-              <label className="block text-[#000000] text-[16px] font-medium">Job Title*</label>
+              <label className="block text-[#000000] text-[16px] font-medium">{cms.job_title_label}</label>
               <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Ex: Product Designer"
+                placeholder={cms.job_title_placeholder}
                 className="mt-1 w-full px-4 py-4 border rounded-md"
               />
             </div>
 
             <div className="mb-4">
-              <label className="block font-medium text-[16px] text-[#000000] text-lg mb-2">Job Description*</label>
+              <label className="block font-medium text-[16px] text-[#000000] text-lg mb-2">{cms.job_desc_label}</label>
               <textarea
-                placeholder="Write about the job in details..."
+                placeholder={cms.job_desc_placeholder}
                 rows={7}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
@@ -243,9 +245,9 @@ const getResources = () => {
             </div>
 
             <div className="mb-4">
-              <label className="block font-medium text-[16px] text-[#000000] text-lg mb-2">Job Requirement*</label>
+              <label className="block font-medium text-[16px] text-[#000000] text-lg mb-2">{cms.job_req_label}</label>
               <textarea
-                placeholder="Write about the job requirements..."
+                placeholder={cms.job_req_placeholder}
                 rows={7}
                 value={requirements}
                 onChange={(e) => setRequirements(e.target.value)}
@@ -257,7 +259,7 @@ const getResources = () => {
             <div className="flex flex-wrap -mx-2">
               {/* Job Category */}
               <div className="w-full sm:w-1/2 px-2 mb-4">
-                <label className="block text-[#000000] text-[16px] mb-2 font-medium">Job Category*</label>
+                <label className="block text-[#000000] text-[16px] mb-2 font-medium">{cms.job_category_label}</label>
                 <div className="relative" ref={categoryRef}>
                   <button
                     type="button"
@@ -288,7 +290,7 @@ const getResources = () => {
               {/* Job Type */}
                 {/* Job Type */}
               <div className="w-full sm:w-1/2 px-2 mb-4">
-                <label className="block text-[#000000] text-[16px] mb-2 font-medium">Job Type*</label>
+                <label className="block text-[#000000] text-[16px] mb-2 font-medium">{cms.job_type_label}</label>
                 <div className="relative" ref={typeRef}>
                   <button
                     type="button"
@@ -318,7 +320,7 @@ const getResources = () => {
 
               {/* Work Type */}
               <div className="w-full sm:w-1/2 px-2 mb-4">
-                <label className="block text-[#000000] text-[16px] mb-2 font-medium">Work Type*</label>
+                <label className="block text-[#000000] text-[16px] mb-2 font-medium">{cms.work_type_label}</label>
                 <div className="relative" ref={workTypeRef}>
                   <button
                     type="button"
@@ -347,7 +349,7 @@ const getResources = () => {
               </div>
               {/* Salary */}
               <div className="w-full sm:w-1/2 px-2 mb-4">
-                <label className="block text-[#000000] text-[16px] mb-2 font-medium">Salary*</label>
+                <label className="block text-[#000000] text-[16px] mb-2 font-medium">{cms.salary_label}</label>
                 <div className="relative" ref={salaryRef}>
                   <button
                     type="button"
@@ -375,10 +377,10 @@ const getResources = () => {
 
               {/* Budget */}
               <div className="w-full sm:w-1/2 px-2 mb-4">
-                <label className="block text-[#000000] text-[16px] mb-2 font-medium">Budgeted Amount*</label>
+                <label className="block text-[#000000] text-[16px] mb-2 font-medium">{cms.budget_label}</label>
                 <input
                   type="text"
-                  placeholder="Enter budgeted amount"
+                  placeholder={cms.budget_placeholder}
                   className="mt-1 w-full px-4 py-4 border rounded-md"
                   value={budget}
                   onChange={(e) => setBudget(e.target.value)}
@@ -390,10 +392,10 @@ const getResources = () => {
 
         {/* Skills & Experience */}
         <div className="bg-white p-[4rem] rounded-lg shadow-md mb-6">
-          <h3 className="text-[24px] font-semibold text-[#EE009D] mb-4">Skills & Experience</h3>
+          <h3 className="text-[24px] font-semibold text-[#EE009D] mb-4">{cms.skills_section}</h3>
           <div>
             <div className="mb-4">
-              <label className="block text-gray-700">Skills*</label>
+              <label className="block text-gray-700">{cms.skills_label}</label>
               <div className="mt-2 flex flex-wrap gap-2">
                 {skills.map((skill) => (
                   <span key={skill} className="bg-gray-200 px-4 py-1 rounded-full text-gray-700 flex items-center">
@@ -404,7 +406,7 @@ const getResources = () => {
               </div>
               <input
                 type="text"
-                placeholder="Add skills and press Enter to save"
+                placeholder={cms.skills_placeholder}
                 className="mt-2 w-full px-4 py-4 border rounded-md"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && e.currentTarget.value.trim()) {
@@ -416,12 +418,12 @@ const getResources = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700">Experience*</label>
+              <label className="block text-gray-700">{cms.experience_label}</label>
               <input
                 value={experience}
                 onChange={(e) => setExperience(e.target.value)}
                 type="text"
-                placeholder="e.g. 2 years"
+                placeholder={cms.experience_placeholder}
                 className="mt-1 w-full px-4 py-4 border rounded-md"
               />
             </div>
@@ -430,7 +432,7 @@ const getResources = () => {
 
         {/* Location */}
         <div className="bg-white rounded-2xl p-[4rem] mt-8">
-          <label className="block font-semibold text-[#ee009d] text-xl tracking-wide mb-4">Location</label>
+          <label className="block font-semibold text-[#ee009d] text-xl tracking-wide mb-4">{cms.location_section}</label>
           <div className="flex flex-wrap -mx-2">
             <div className="w-full px-2 mb-4">
               <label className="block font-semibold text-green-600 text-lg mb-2">Country*</label>
@@ -476,7 +478,7 @@ const getResources = () => {
         {/* Actions */}
         <div className="flex justify-end space-x-4 mt-6">
           <button className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400">
-            Cancel
+            {cms.cancel_button}
           </button>
           <button
             onClick={submit}
@@ -485,7 +487,7 @@ const getResources = () => {
               loading ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
-            {loading ? "Submitting..." : "Post Job"}
+            {loading ? cms.posting_button : cms.post_button}
           </button>
         </div>
       </section>

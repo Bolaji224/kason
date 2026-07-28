@@ -2,6 +2,7 @@ import { useState, ChangeEvent } from "react";
 import { usePaystackPayment } from "react-paystack";
 import ls from 'localstorage-slim';
 import { APP_API_URL } from "../../../utils/http_utils";
+import { useCMS } from "../../../hooks/useCMS";
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -46,6 +47,13 @@ interface StepReviewProps {
   onBack: () => void;
   onSubmit: () => void;
   isLoading: boolean;
+  feeLabel: string;
+  feeSubtitle: string;
+  feeAmount: string;
+  feeNaira: string;
+  termsText: string;
+  submitButton: string;
+  paymentLoadingText: string;
 }
 
 interface CardProps {
@@ -114,6 +122,7 @@ const SMARTSTART_AMOUNT = 78000 * 100; // ₦78,000 in kobo (£39 × ₦2,000)
 // ── Root Component ─────────────────────────────────────────────────────────
 
 export default function SmartStart(): JSX.Element {
+  const { employerDashboardSmartStart: cms } = useCMS();
   const [step, setStep] = useState<number>(1);
   const [form, setForm] = useState<FormState>(initialForm);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -208,11 +217,11 @@ export default function SmartStart(): JSX.Element {
           <div className="flex items-center gap-3 mb-2">
             <span className="text-xl font-bold text-gray-900 tracking-tight">Workason</span>
             <span className="bg-emerald-700 text-emerald-50 text-xs font-semibold px-3 py-1 rounded-full tracking-wide">
-              SmartStart™
+              {cms.header_badge}
             </span>
           </div>
           <p className="text-sm text-gray-500 leading-relaxed">
-            Tell us about your project. We'll hand-pick 3–5 verified freelancers from our talent pool — no searching required.
+            {cms.header_description}
           </p>
         </div>
 
@@ -236,6 +245,13 @@ export default function SmartStart(): JSX.Element {
             onBack={() => setStep(3)}
             onSubmit={handleSubmit}
             isLoading={isLoading}
+            feeLabel={cms.fee_label}
+            feeSubtitle={cms.fee_subtitle}
+            feeAmount={cms.fee_amount}
+            feeNaira={cms.fee_naira}
+            termsText={cms.terms_text}
+            submitButton={cms.submit_button}
+            paymentLoadingText={cms.payment_loading_text}
           />
         )}
 
@@ -488,7 +504,7 @@ function StepFiles({ form, set, handleFileChange, onNext, onBack }: StepFilesPro
 
 // ── Step 4: Review ─────────────────────────────────────────────────────────
 
-function StepReview({ form, set, onBack, onSubmit, isLoading }: StepReviewProps): JSX.Element {
+function StepReview({ form, set, onBack, onSubmit, isLoading, feeLabel, feeSubtitle, feeAmount, feeNaira, termsText, submitButton, paymentLoadingText }: StepReviewProps): JSX.Element {
   const budget =
     form.budgetMin || form.budgetMax
       ? `£${Number(form.budgetMin || 0).toLocaleString()} – £${Number(form.budgetMax || 0).toLocaleString()}`
@@ -522,12 +538,12 @@ function StepReview({ form, set, onBack, onSubmit, isLoading }: StepReviewProps)
       {/* Fee box */}
       <div className="flex justify-between items-center bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3 mb-4">
         <div>
-          <p className="text-sm font-semibold text-emerald-900">SmartStart service fee</p>
-          <p className="text-xs text-emerald-700 mt-0.5">Covers curated matching + guided hiring</p>
+          <p className="text-sm font-semibold text-emerald-900">{feeLabel}</p>
+          <p className="text-xs text-emerald-700 mt-0.5">{feeSubtitle}</p>
         </div>
         <div className="text-right">
-          <p className="text-lg font-bold text-emerald-900">£39</p>
-          <p className="text-xs text-emerald-700">≈ ₦78,000</p>
+          <p className="text-lg font-bold text-emerald-900">{feeAmount}</p>
+          <p className="text-xs text-emerald-700">{feeNaira}</p>
         </div>
       </div>
 
@@ -540,13 +556,12 @@ function StepReview({ form, set, onBack, onSubmit, isLoading }: StepReviewProps)
           onChange={(e: ChangeEvent<HTMLInputElement>) => set("agreed", e.target.checked)}
         />
         <span className="text-xs text-gray-500 leading-relaxed">
-          I agree to Workason's terms of service and understand the SmartStart fee is
-          non-refundable once freelancer matching begins.
+          {termsText}
         </span>
       </label>
 
       <PrimaryButton onClick={onSubmit} isLoading={isLoading} disabled={isLoading}>
-        {isLoading ? "Opening payment..." : "Submit & pay £39 →"}
+        {isLoading ? paymentLoadingText : submitButton}
       </PrimaryButton>
       <BackButton onClick={onBack} />
     </div>
