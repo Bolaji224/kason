@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { ChevronDown, ChevronUp, Upload, Calendar, Check, X, ArrowLeft, ArrowRight, Sparkles, User, Briefcase, FileText, Package, Clock, Shield } from 'lucide-react';
 import { httpGetWithoutToken } from "../../../utils/http_utils"; // adjust path as needed
+import { useCMS } from "../../../hooks/useCMS";
 
 interface FormData {
   fullName: string;
@@ -24,6 +25,7 @@ interface FormData {
 }
 
 const SubscriptionPlan = () => {
+    const { candidateDashboardSmartStart: cms } = useCMS();
     const [currentStep, setCurrentStep] = useState<number>(1);
     const [countries, setCountries] = useState<any[]>([]);  // ← added
     const [formData, setFormData] = useState<FormData>({
@@ -73,12 +75,12 @@ const SubscriptionPlan = () => {
     };
 
     const stepConfig = [
-        {id:1, title: 'Personal Details', icon: User, color: 'from-blue-600 to-blue-600 '},
-        {id:2, title: 'Role & Skills', icon: Briefcase, color: 'from-blue-600 to-blue-600'},
-        {id:3, title: 'Portfolio', icon: FileText, color: 'from-blue-600 to-blue-600'},
-        {id:4, title: 'Package & Payment', icon: Package, color: 'from-blue-600 to-blue-600'},
-        {id:5, title: 'Availability', icon: Clock, color: 'from-blue-600 to-blue-600'},
-        {id:6, title: 'Consent & Agreement', icon: Shield, color: 'from-blue-600 to-blue-600'},
+        {id:1, title: cms.step_personal_title, icon: User, color: 'from-blue-600 to-blue-600 '},
+        {id:2, title: cms.step_role_title, icon: Briefcase, color: 'from-blue-600 to-blue-600'},
+        {id:3, title: cms.step_portfolio_title, icon: FileText, color: 'from-blue-600 to-blue-600'},
+        {id:4, title: cms.step_package_title, icon: Package, color: 'from-blue-600 to-blue-600'},
+        {id:5, title: cms.step_availability_title, icon: Clock, color: 'from-blue-600 to-blue-600'},
+        {id:6, title: cms.step_consent_title, icon: Shield, color: 'from-blue-600 to-blue-600'},
     ];
 
     const roles = ['Virtual Assistant', 'Editor'];
@@ -166,8 +168,8 @@ const SubscriptionPlan = () => {
                       <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl mb-4">
                         <User className="w-8 h-8 text-white" />
                       </div>
-                      <h2 className="text-2xl font-bold text-gray-900 mb-2">Personal Details</h2>
-                      <p className="text-gray-600">Tell us about yourself to get started</p>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-2">{cms.step_personal_title}</h2>
+                      <p className="text-gray-600">{cms.personal_details_subtitle}</p>
                     </div>
         
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -231,8 +233,8 @@ const SubscriptionPlan = () => {
                       <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl mb-4">
                         <Briefcase className="w-8 h-8 text-white" />
                       </div>
-                      <h2 className="text-2xl font-bold text-gray-900 mb-2">Role & Skills</h2>
-                      <p className="text-gray-600">Define your expertise and experience level</p>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-2">{cms.step_role_title}</h2>
+                      <p className="text-gray-600">{cms.role_skills_subtitle}</p>
                     </div>
         
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -281,8 +283,8 @@ const SubscriptionPlan = () => {
                       <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl mb-4">
                         <FileText className="w-8 h-8 text-white" />
                       </div>
-                      <h2 className="text-2xl font-bold text-gray-900 mb-2">Portfolio</h2>
-                      <p className="text-gray-600">Showcase your work and experience</p>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-2">{cms.step_portfolio_title}</h2>
+                      <p className="text-gray-600">{cms.portfolio_subtitle}</p>
                     </div>
                     <div className="space-y-6">
                       <div className="space-y-2">
@@ -343,8 +345,8 @@ const SubscriptionPlan = () => {
                       <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl mb-4">
                         <Package className="w-8 h-8 text-white" />
                       </div>
-                      <h2 className="text-2xl font-bold text-gray-900 mb-2">Package & Payment</h2>
-                      <p className="text-gray-600">Choose your SmartStart™ package</p>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-2">{cms.step_package_title}</h2>
+                      <p className="text-gray-600">{cms.package_subtitle}</p>
                     </div>
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-6">Choose SmartStart™ Package <span className="text-[#ee009d]">*</span></label>
@@ -379,8 +381,8 @@ const SubscriptionPlan = () => {
                       <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl mb-4">
                         <Clock className="w-8 h-8 text-white" />
                       </div>
-                      <h2 className="text-2xl font-bold text-gray-900 mb-2">Availability & Preferences</h2>
-                      <p className="text-gray-600">Set your schedule and client preferences</p>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-2">{cms.step_availability_title}</h2>
+                      <p className="text-gray-600">{cms.availability_subtitle}</p>
                     </div>
                     <div className="space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -423,8 +425,8 @@ const SubscriptionPlan = () => {
                       <div className="inline-flex items-center justify-center w-16 h-16 bg-[#2AA100] hover:bg-teal-600 rounded-2xl mb-4">
                         <Shield className="w-8 h-8 text-white" />
                       </div>
-                      <h2 className="text-2xl font-bold text-gray-900 mb-2">Consent & Agreement</h2>
-                      <p className="text-gray-600">Final agreements to complete your application</p>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-2">{cms.step_consent_title}</h2>
+                      <p className="text-gray-600">{cms.consent_subtitle}</p>
                     </div>
                     <div className="bg-gradient-to-r from-green-50 to-teal-50 rounded-2xl p-8 space-y-6">
                       <label className="flex items-start space-x-4 cursor-pointer group">
@@ -435,7 +437,7 @@ const SubscriptionPlan = () => {
                           </div>
                         </div>
                         <span className="text-sm text-gray-700 group-hover:text-green-700 transition-colors">
-                          I agree to the SmartStart™ Terms & Conditions <span className="text-[#ee009d] font-semibold">*</span>
+                          {cms.terms_checkbox_text} <span className="text-[#ee009d] font-semibold">*</span>
                         </span>
                       </label>
                       <label className="flex items-start space-x-4 cursor-pointer group">
@@ -446,7 +448,7 @@ const SubscriptionPlan = () => {
                           </div>
                         </div>
                         <span className="text-sm text-gray-700 group-hover:text-green-700 transition-colors">
-                          I consent to my profile being listed for job matching <span className="text-[#ee009d] font-semibold">*</span>
+                          {cms.consent_checkbox_text} <span className="text-[#ee009d] font-semibold">*</span>
                         </span>
                       </label>
                     </div>
@@ -463,8 +465,8 @@ const SubscriptionPlan = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h1 className="text-3xl font-bold text-[#1E2A38] mb-2">SmartStart™ Application</h1>
-              <p className="text-gray-600">Transform your freelance career with our comprehensive program</p>
+              <h1 className="text-3xl font-bold text-[#1E2A38] mb-2">{cms.page_heading}</h1>
+              <p className="text-gray-600">{cms.page_description}</p>
             </div>
           </div>
 
@@ -506,7 +508,7 @@ const SubscriptionPlan = () => {
         <div className="flex items-center justify-between pt-8 border-t-2 border-gray-100">
           <button onClick={prevStep} disabled={currentStep === 1} className={`flex items-center space-x-2 px-8 py-4 rounded-xl font-semibold transition-all duration-300 ${currentStep > 1 ? 'text-gray-700 hover:text-purple-700 hover:bg-purple-50 border-2 border-gray-200 hover:border-purple-500' : 'text-gray-400 cursor-not-allowed border-2 border-gray-200'}`}>
             <ArrowLeft className="w-5 h-5" />
-            Previous
+            {cms.prev_button}
           </button>
 
           <div className="flex items-center space-x-2">
@@ -521,13 +523,13 @@ const SubscriptionPlan = () => {
 
           {currentStep < totalSteps ? (
             <button onClick={nextStep} disabled={!isStepValid(currentStep)} className={`flex items-center space-x-2 px-8 py-4 rounded-xl font-semibold transition-all duration-300 ${isStepValid(currentStep) ? 'bg-[#ee009d] text-white hover:bg-purple-700 shadow-lg hover:shadow-xl transform hover:scale-105' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}>
-              Next Step
+              {cms.next_button}
               <ArrowRight className="w-5 h-5" />
             </button>
           ) : (
             <button onClick={handlePayment} disabled={!isStepValid(currentStep)} className={`flex items-center space-x-2 px-8 py-4 rounded-xl font-semibold transition-all duration-300 ${isStepValid(currentStep) ? 'bg-[#2AA100] text-white hover:bg-teal-700 shadow-lg hover:shadow-xl transform hover:scale-105' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}>
               <Sparkles className="w-5 h-5" />
-              Submit Application
+              {cms.submit_button}
             </button>
           )}
         </div>

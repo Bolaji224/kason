@@ -3,8 +3,10 @@ import { UilAngleDown, UilAngleUp } from "@iconscout/react-unicons";
 import SavedJobsCard from "./SavedJobsCard";
 import { httpGetWithToken, httpPostWithToken } from "../../../utils/http_utils";
 import { useToast } from "@chakra-ui/react";
+import { useCMS } from "../../../hooks/useCMS";
 
 const SavedJobs: React.FC = () => {
+  const { candidateDashboard } = useCMS();
   const [currentPage, setCurrentPage] = useState(1);
   const [showDropdown, setShowDropdown] = useState<number | null>(null);
   const [selectedAlert, setSelectedAlert] = useState<any>(null);
@@ -79,7 +81,7 @@ const SavedJobs: React.FC = () => {
   return (
     <div className="container mx-auto mt-[8rem] px-4 md:px-4 lg:px-8">
       <section className="flex flex-col md:flex-row items-center justify-between md:space-x-4">
-        <h2 className="text-[#2aa100] text-[24px] sm:text-[38px] font-poppins font-semibold mb-4 md:mb-0">Saved Jobs</h2>
+        <h2 className="text-[#2aa100] text-[24px] sm:text-[38px] font-poppins font-semibold mb-4 md:mb-0">{candidateDashboard.saved_jobs_heading}</h2>
       </section>
       <div className="py-8">
         <div className="flex justify-center">
@@ -87,7 +89,7 @@ const SavedJobs: React.FC = () => {
             {
               currentJobs.length == 0
               &&
-              <p>No saved jobs found!</p>
+              <p>{candidateDashboard.saved_jobs_empty}</p>
             }
             {currentJobs.map((job:any, index) => (
               <SavedJobsCard

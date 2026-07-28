@@ -157,7 +157,7 @@ const EmployersDashboard = () => {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-2">
-                Employer Dashboard
+                {employerDashboard.page_heading}
               </h1>
               <p className="text-slate-600 flex items-center gap-2">
                 <Calendar className="text-blue-500" size={18} />
@@ -194,7 +194,7 @@ const EmployersDashboard = () => {
           {/* Applicants Trend */}
           <div className="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-slate-900">Applicant Trends</h2>
+              <h2 className="text-xl font-bold text-slate-900">{employerDashboard.applicant_trends_heading}</h2>
               <button className="text-slate-400 hover:text-slate-600">
                 <MoreVertical size={24} />
               </button>
@@ -226,7 +226,7 @@ const EmployersDashboard = () => {
 
           {/* Applicant Sources */}
           <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
-            <h2 className="text-xl font-bold text-slate-900 mb-6">Applicant Sources</h2>
+            <h2 className="text-xl font-bold text-slate-900 mb-6">{employerDashboard.applicant_sources_heading}</h2>
             <ResponsiveContainer width="100%" height={200}>
               <PieChart>
                 <Pie
