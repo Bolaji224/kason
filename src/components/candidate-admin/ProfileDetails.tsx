@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent, useEffect, useContext } from "react";
+import axios from "axios";
 import MapComponent from "../reusable/map/MapComponent";
 import { UilCheck, UilTimes } from "@iconscout/react-unicons";
 import {
@@ -6,6 +7,7 @@ import {
   httpGetWithoutToken,
   httpPostWithToken,
 } from "../../utils/http_utils";
+import { COUNTRIES_LIST } from "../../utils/countriesList";
 import { iProfile } from "../../models/profle";
 import { iSocial } from "../../models/social";
 import {
@@ -84,10 +86,13 @@ const ProfileImageUpload: React.FC = () => {
 
   const getCountries = async () => {
     try {
-      const resp = await httpGetWithoutToken("countries");
-      setCountries(resp.data ?? []);
-    } catch (err) {
-      console.error("Error fetching countries:", err);
+      const res = await axios.get("https://restcountries.com/v3.1/all?fields=name,cca2");
+      const sorted = res.data
+        .map((c: any) => ({ code: c.cca2, name: c.name.common }))
+        .sort((a: any, b: any) => a.name.localeCompare(b.name));
+      setCountries(sorted);
+    } catch {
+      setCountries(COUNTRIES_LIST);
     }
   };
 

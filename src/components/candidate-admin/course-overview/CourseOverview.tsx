@@ -313,7 +313,7 @@ const CourseContentSidebar: React.FC<{
     <div className="bg-white rounded-xl shadow-sm border border-gray-200">
       <div className="p-6 border-b border-gray-200">
         <h3 className="text-xl font-bold text-gray-900">Course Content</h3>
-        <p className="text-sm text-gray-600 mt-1">5 modules • 17 videos • 6 quizzes</p>
+        <p className="text-sm text-gray-600 mt-1">2 modules • 7 videos • 2 quizzes</p>
       </div>
 
       <div className="p-4 space-y-4 max-h-96 overflow-y-auto">
@@ -322,7 +322,7 @@ const CourseContentSidebar: React.FC<{
           <button onClick={() => toggleModule('overview')} className="w-full flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
             <div className="flex items-center space-x-3">
               <div className="text-sm font-medium text-gray-900">Course Introduction</div>
-              <span className="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded">2 videos</span>
+              <span className="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded">video1 · video2</span>
             </div>
             {expandedModules.includes('overview') ? <ChevronUp className="w-4 h-4 text-gray-600" /> : <ChevronDown className="w-4 h-4 text-gray-600" />}
           </button>
@@ -407,25 +407,27 @@ const CourseOverview: React.FC = () => {
   const [completedVideos, setCompletedVideos] = useState<string[]>([]);
   const [showQuiz, setShowQuiz] = useState(false); // when true, render QuizPage
 
-  // Sample data with working video URLs (same as you provided)
+  // Videos are served from /videos/ on the server.
+  // Upload files via cPanel named exactly: video1.mp4, video2.mp4 ... video7.mp4
+  // Place them in: public_html/videos/
   const overviewVideos: VideoType[] = [
     {
       id: 'intro-1',
       title: 'Course Introduction',
-      duration: '1:01min',
+      duration: '',
       completed: false,
       locked: false,
-      videoUrl: 'https://vz-99fa4eb8-1fc.b-cdn.net/a2231b94-637c-4b86-9c23-1ad01708c261/playlist.m3u8',
+      videoUrl: '/videos/video1.mp4',
       description: "Welcome to the course! Get an overview of what you'll learn and how the course is structured.",
     },
     {
       id: 'intro-2',
       title: 'Getting Started',
-      duration: '59min',
+      duration: '',
       completed: false,
       locked: false,
-      videoUrl: 'https://vz-99fa4eb8-1fc.b-cdn.net/5da3c4be-81e8-4b8a-9fa1-527b9d008a23/playlist.m3u8',
-      description: "Learn how to set up your environment and get ready for the exciting journey ahead.",
+      videoUrl: '/videos/video2.mp4',
+      description: 'Learn how to set up your environment and get ready for the exciting journey ahead.',
     },
   ];
 
@@ -435,39 +437,66 @@ const CourseOverview: React.FC = () => {
       title: 'Module 1: Foundation Concepts',
       description: 'Learn the fundamental concepts and principles',
       progress: '0/3',
-      totalDuration: '45min',
+      totalDuration: '',
       videos: [
         {
           id: 'm1-v1',
           title: 'Understanding the Basics',
-          duration: '12min',
+          duration: '',
           completed: false,
           locked: false,
-          videoUrl: 'https://vz-99fa4eb8-1fc.b-cdn.net/a2231b94-637c-4b86-9c23-1ad01708c261/playlist.m3u8',
+          videoUrl: '/videos/video3.mp4',
           description: "Dive into the core concepts that form the foundation of everything you'll learn.",
         },
         {
           id: 'm1-v2',
           title: 'Core Principles',
-          duration: '15min',
+          duration: '',
           completed: false,
           locked: false,
-          videoUrl: 'https://vz-99fa4eb8-1fc.b-cdn.net/a2231b94-637c-4b86-9c23-1ad01708c261/playlist.m3u8',
+          videoUrl: '/videos/video4.mp4',
           description: 'Explore the essential principles that guide best practices in this field.',
         },
         {
           id: 'm1-v3',
           title: 'Practical Applications',
-          duration: '18min',
+          duration: '',
           completed: false,
           locked: false,
-          videoUrl: 'https://vz-99fa4eb8-1fc.b-cdn.net/a2231b94-637c-4b86-9c23-1ad01708c261/playlist.m3u8',
+          videoUrl: '/videos/video5.mp4',
           description: "See how to apply what you've learned in real-world scenarios.",
         },
       ],
       quiz: { title: 'Module 1 Quiz', questions: 10, completed: false },
     },
-    // Other modules would follow similar pattern
+    {
+      id: 'module-2',
+      title: 'Module 2: Advanced Techniques',
+      description: 'Take your skills to the next level',
+      progress: '0/2',
+      totalDuration: '',
+      videos: [
+        {
+          id: 'm2-v1',
+          title: 'Advanced Strategies',
+          duration: '',
+          completed: false,
+          locked: false,
+          videoUrl: '/videos/video6.mp4',
+          description: 'Discover advanced strategies used by top professionals in this field.',
+        },
+        {
+          id: 'm2-v2',
+          title: 'Putting It All Together',
+          duration: '',
+          completed: false,
+          locked: false,
+          videoUrl: '/videos/video7.mp4',
+          description: 'Combine everything you have learned into a complete, practical workflow.',
+        },
+      ],
+      quiz: { title: 'Module 2 Quiz', questions: 10, completed: false },
+    },
   ];
 
   const handleVideoSelect = (video: VideoType) => {
@@ -502,16 +531,12 @@ const CourseOverview: React.FC = () => {
             <p className="text-xl text-[#646A73] mb-6">Master the fundamentals and advanced techniques in this comprehensive course</p>
             <div className="flex items-center space-x-6 text-[#646A73]">
               <div className="flex items-center space-x-2">
-                <Clock className="w-5 h-5" />
-                <span>3.5 hours total</span>
-              </div>
-              <div className="flex items-center space-x-2">
                 <Play className="w-5 h-5" />
-                <span>6 videos</span>
+                <span>7 videos</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-5 h-5 rounded bg-blue-500"></div>
-                <span>3 quizzes</span>
+                <span>2 quizzes</span>
               </div>
             </div>
           </div>
@@ -536,18 +561,14 @@ const CourseOverview: React.FC = () => {
                     You'll learn through practical examples, real-world case studies, and hands-on exercises.
                     Each module builds upon the previous one, ensuring a smooth learning progression.
                   </p>
-                  <div className="grid md:grid-cols-3 gap-4">
+                  <div className="grid md:grid-cols-2 gap-4">
                     <div className="text-center p-4 bg-purple-50 rounded-lg">
-                      <div className="text-2xl font-bold text-purple-600">6</div>
+                      <div className="text-2xl font-bold text-purple-600">7</div>
                       <div className="text-sm text-gray-600">Video Lessons</div>
                     </div>
                     <div className="text-center p-4 bg-blue-50 rounded-lg">
-                      <div className="text-2xl font-bold text-blue-600">3</div>
+                      <div className="text-2xl font-bold text-blue-600">2</div>
                       <div className="text-sm text-gray-600">Quizzes</div>
-                    </div>
-                    <div className="text-center p-4 bg-green-50 rounded-lg">
-                      <div className="text-2xl font-bold text-green-600">3.5</div>
-                      <div className="text-sm text-gray-600">Hours Content</div>
                     </div>
                   </div>
                 </div>

@@ -33,7 +33,7 @@ const WeWorkPerHourFAQ: React.FC = () => {
       question: "How many categories of users do we have?",
       answer: (
         <div>
-          <p className="mb-3">WeWorkPerHour actually has three user categories:</p>
+          <p className="mb-3">Workason actually has three user categories:</p>
           <div className="space-y-2">
             <div>
               <strong>1. Ordinary Users</strong> → Clients post jobs, freelancers
@@ -107,14 +107,14 @@ const WeWorkPerHourFAQ: React.FC = () => {
       category: "SmartStart Users (Verified Freelancer Matching)",
       question: "Who manages the work?",
       answer:
-        "The client works directly with the freelancer but benefits from WeWorkPerHour's vetting, SmartStart pack, and ProofToPay protection.",
+        "The client works directly with the freelancer but benefits from Workason's vetting, SmartStart pack, and ProofToPay protection.",
     },
     {
       id: "managed-service",
       category: "Pro Talent Pool Users",
       question: "What is the Managed Service?",
       answer:
-        "Instead of freelancers, WeWorkPerHour's in-house team of editors, assistants, and creatives delivers the work directly. This is ideal for clients who want a hands-off, guaranteed quality solution.",
+        "Instead of freelancers, Workason's in-house team of editors, assistants, and creatives delivers the work directly. This is ideal for clients who want a hands-off, guaranteed quality solution.",
     },
     {
       id: "managed-services-covered",
@@ -175,7 +175,7 @@ const WeWorkPerHourFAQ: React.FC = () => {
     {
       id: "international",
       category: "Other Common Questions",
-      question: "Can international clients use WeWorkPerHour?",
+      question: "Can international clients use Workason?",
       answer:
         "Yes, we support clients and freelancers in Nigeria, the UK, and globally.",
     },

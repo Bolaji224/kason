@@ -68,17 +68,22 @@ const FooterSection: React.FC = () => {
   </li>
 </ul>
       </div>
-        <div className="flex mt-4 mb-3 space-x-4 bg-white rounded-xl px-4 py-2">
-          <Link to="/">
-          <FaFacebook size={20} className="rounded-full" color="#1E2A38" />
+        <div className="flex mt-4 mb-3 space-x-4 bg-white rounded-xl px-4 py-2 flex-wrap gap-y-2">
+          <Link to="/" title="LinkedIn (Personal)">
+            <FaLinkedin size={20} className="rounded-full" color="#1E2A38" />
           </Link>
-          <Link to="/">
-          <FaLinkedin size={20} className="rounded-full" color="#1E2A38" />
+          <Link to="/" title="LinkedIn (Business)">
+            <FaLinkedin size={20} className="rounded-full" color="#0077b5" />
           </Link>
-        <Link to="https://www.instagram.com/weworkperhourng">
-        <FaInstagram size={20} className="rounded-full" color="#1E2A38" />
-        </Link>
-         <Link to="https://x.com/weworkperhour"> <FaXTwitter size={20} className="rounded-full" color="#1E2A38" /></Link>
+          <Link to="https://www.instagram.com/workasonhq" title="Instagram">
+            <FaInstagram size={20} className="rounded-full" color="#1E2A38" />
+          </Link>
+          <Link to="https://x.com/workason" title="X (Twitter)">
+            <FaXTwitter size={20} className="rounded-full" color="#1E2A38" />
+          </Link>
+          <Link to="/" title="Facebook">
+            <FaFacebook size={20} className="rounded-full" color="#1E2A38" />
+          </Link>
         </div>
       </div>
       

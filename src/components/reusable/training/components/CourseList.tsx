@@ -4,7 +4,7 @@ import Videos from '../../../constant/Videos';
 const courses = [
   {
     title: 'Introduction',
-    description: 'WeWorkPerHour Virtual Assistant Intro.',
+    description: 'Workason Virtual Assistant Intro.',
     price: 49.99,
     instructor: 'John Doe',
     videoUrl: Videos.CardOneVi,

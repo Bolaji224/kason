@@ -73,6 +73,7 @@ const Navbar: React.FC = () => {
         ],
       },
       { label: "Social Impact", path: "delete-account" },
+      { label: "Affiliate Programme", path: "affiliate" },
 
       { label: "Log in", path: "login" },
 

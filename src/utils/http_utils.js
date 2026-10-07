@@ -18,7 +18,7 @@ export const httpPostWithoutToken = async (url, data) => {
       return resp.data;
     })
     .catch(function (error) {
-      if (error.code === "ERR_NETWORK") {
+      if (NETWORK_ERROR_CODES.includes(error.code)) {
         return { error: "An error occurred, please try again later" };
       }
       const msg = error?.response?.data?.message || "An error occurred";
@@ -29,6 +29,8 @@ export const httpPostWithoutToken = async (url, data) => {
       };
     });
 };
+
+const NETWORK_ERROR_CODES = ["ERR_NETWORK", "ERR_FAILED", "ERR_CERT_DATE_INVALID", "ERR_CERT_COMMON_NAME_INVALID", "ERR_CERT_AUTHORITY_INVALID", "ERR_SSL_PROTOCOL_ERROR", "ECONNABORTED"];
 
 export const httpPostWithToken = async (url, data) => {
   // const token = sessionStorage.getItem("wwph_token");
@@ -43,19 +45,19 @@ export const httpPostWithToken = async (url, data) => {
       return resp.data;
     })
     .catch(function (error) {
-      if (error.code === "ERR_NETWORK") {
+      if (NETWORK_ERROR_CODES.includes(error.code)) {
         return { error: "An error occurred, please try again later" };
       }
       const msg =
-        _.get(error, "response?.data?.message") ||
+        _.get(error, "response.data.message") ||
         error?.response?.data?.message;
 
-        if (msg === "Unauthenticated.") {
-  const publicPaths = ["/", "/login", "/register", "/about", "/career-tips", "/hire-talent", "/faq"];
-  if (!publicPaths.includes(window.location.pathname)) {
-    window.location.href = "/login";
-  }
-}
+      if (msg === "Unauthenticated.") {
+        const publicPaths = ["/", "/login", "/register", "/about", "/career-tips", "/hire-talent", "/faq"];
+        if (!publicPaths.includes(window.location.pathname)) {
+          window.location.href = "/login";
+        }
+      }
       return { error: msg };
     });
 };
@@ -73,12 +75,12 @@ export const httpGetWithToken = async (url) => {
       return resp.data;
     })
     .catch(function (error) {
-      if (error.code === "ERR_NETWORK") {
+      if (NETWORK_ERROR_CODES.includes(error.code)) {
         return { error: "An error occurred, please try again later" };
       }
-      const msg = _.get(error, "response?.data?.message") || error?.response?.data?.message;
+      const msg = _.get(error, "response.data.message") || error?.response?.data?.message;
       if (msg === "Unauthenticated.") {
-        window.location.href = "/login"
+        window.location.href = "/login";
       }
       return { error: msg };
     });
@@ -90,11 +92,11 @@ export const httpGetWithoutToken = async (url, data) => {
       return resp.data;
     })
     .catch(function (error) {
-      if (error.code === "ERR_NETWORK") {
+      if (NETWORK_ERROR_CODES.includes(error.code)) {
         return { error: "An error occurred, please try again later" };
       }
       const msg =
-        _.get(error, "response?.data?.message") ||
+        _.get(error, "response.data.message") ||
         error?.response?.data?.message;
       return { error: msg };
     });

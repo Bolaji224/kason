@@ -78,10 +78,6 @@ interface StepIndicatorProps {
 const PROJECT_TYPES: string[] = [
   "Video Editing",
   "Virtual Assistant",
-  "Social Media Management",
-  "Copywriting",
-  "Data Entry",
-  "Other",
 ];
 
 const BUDGET_PRESETS: BudgetPreset[] = [
@@ -109,7 +105,7 @@ const initialForm: FormState = {
 };
 
 const PAYSTACK_PUBLIC_KEY = process.env.REACT_APP_PAYSTACK_PUBLIC_KEY!;
-const SMARTSTART_AMOUNT = 78000 * 100; // ₦78,000 in kobo (£39 × ₦2,000)
+const SMARTSTART_AMOUNT = 10000 * 100; // ₦10,000 in kobo (£15)
 
 // ── Root Component ─────────────────────────────────────────────────────────
 
@@ -118,6 +114,7 @@ export default function SmartStart(): JSX.Element {
   const [form, setForm] = useState<FormState>(initialForm);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+  const [submitted, setSubmitted] = useState<boolean>(false);
 
   const set = <K extends keyof FormState>(key: K, val: FormState[K]): void => {
     setForm((f) => ({ ...f, [key]: val }));
@@ -167,6 +164,7 @@ export default function SmartStart(): JSX.Element {
       headers: { Authorization: `Bearer ${token}` },
       body: formData,
     });
+    setSubmitted(true);
   };
 
   const handleSubmit = (): void => {
@@ -198,6 +196,8 @@ export default function SmartStart(): JSX.Element {
       setIsLoading(false);
     }
   };
+
+  if (submitted) return <SuccessView />;
 
   return (
     <div className="min-h-screen bg-stone-50 flex justify-center px-4 py-10 font-sans">
@@ -526,8 +526,8 @@ function StepReview({ form, set, onBack, onSubmit, isLoading }: StepReviewProps)
           <p className="text-xs text-emerald-700 mt-0.5">Covers curated matching + guided hiring</p>
         </div>
         <div className="text-right">
-          <p className="text-lg font-bold text-emerald-900">£39</p>
-          <p className="text-xs text-emerald-700">≈ ₦78,000</p>
+          <p className="text-lg font-bold text-emerald-900">£15</p>
+          <p className="text-xs text-emerald-700">≈ ₦10,000</p>
         </div>
       </div>
 
@@ -546,7 +546,7 @@ function StepReview({ form, set, onBack, onSubmit, isLoading }: StepReviewProps)
       </label>
 
       <PrimaryButton onClick={onSubmit} isLoading={isLoading} disabled={isLoading}>
-        {isLoading ? "Opening payment..." : "Submit & pay £39 →"}
+        {isLoading ? "Opening payment..." : "Submit & pay £15 →"}
       </PrimaryButton>
       <BackButton onClick={onBack} />
     </div>

@@ -110,7 +110,7 @@ const EmployersRegisterForm: React.FC = () => {
           <div>
           
            <h2 className="text-2xl font-sans font-bold text-center mb-6">
-              Welcome to  <Link to='/'><span className="text-[#ee009d]">WeWorkPerHour</span>
+              Welcome to  <Link to='/'><span className="text-[#ee009d]">Workason</span>
               </Link>
             </h2>
            

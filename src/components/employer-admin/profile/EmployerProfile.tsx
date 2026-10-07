@@ -1,9 +1,11 @@
 import React, { useState, ChangeEvent, useContext, useEffect, FormEvent } from "react";
+import axios from "axios";
 import { UilCheck, UilTimes } from "@iconscout/react-unicons";
 import { Avatar, Button, Divider, useToast } from "@chakra-ui/react";
 import { iProfileCompany } from "../../../models/profle";
 import { iSocial } from "../../../models/social";
 import { httpGetWithToken, httpGetWithoutToken, httpPostWithToken } from "../../../utils/http_utils";
+import { COUNTRIES_LIST } from "../../../utils/countriesList";
 import { AppContext } from "../../../global/state";
 
 const EmployerProfile: React.FC = () => {
@@ -51,12 +53,12 @@ const EmployerProfile: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (profile.country) {
+    if (profile.country && countries.length > 0) {
       getStates(profile.country);
-    } else {
+    } else if (!profile.country) {
       setStates([]);
     }
-  }, [profile.country]);
+  }, [profile.country, countries]);
 
   const getProfile = async () => {
     try {
@@ -94,24 +96,24 @@ const validate = () => {
 
   const getCountries = async () => {
     try {
-      const res = await httpGetWithoutToken("countries");
-      const items: any[] = Array.isArray(res)
-        ? res
-        : Array.isArray(res?.data)
-        ? res.data
-        : [];
-      setCountries(items);
-    } catch (error) {
-      console.error("Failed to fetch countries:", error);
+      const res = await axios.get("https://restcountries.com/v3.1/all?fields=name,cca2");
+      const sorted = res.data
+        .map((c: any) => ({ code: c.cca2, name: c.name.common }))
+        .sort((a: any, b: any) => a.name.localeCompare(b.name));
+      setCountries(sorted);
+    } catch {
+      setCountries(COUNTRIES_LIST);
     }
   };
 
-  const getStates = async (countryCode: string) => {
-    if (!countryCode) {
+  const getStates = async (countryName: string) => {
+    if (!countryName) {
       setStates([]);
       return;
     }
     try {
+      const match = countries.find((c) => c.name === countryName);
+      const countryCode = match?.code ?? countryName;
       const res = await httpGetWithoutToken(`countries/${countryCode}`);
       const items: any[] = Array.isArray(res)
         ? res
@@ -120,7 +122,6 @@ const validate = () => {
         : [];
       setStates(items);
     } catch (error) {
-      console.error("Failed to fetch states:", error);
       setStates([]);
     }
   };
@@ -271,9 +272,11 @@ const validate = () => {
 
         {/* Avatar Section */}
         <div className="flex items-center flex-wrap gap-4 py-4">
+         
+        
           {profile.avatar || image ? (
             <img
-              className="h-16 w-16 md:h-20 md:w-20 rounded-full object-cover"
+              className="h-16 w-16 md:h-20 md:w-20 rounded-full object-cover "
               src={image ? (image as string) : profile.avatar}
               alt="Profile"
             />
@@ -300,10 +303,12 @@ const validate = () => {
                 <button type="button" onClick={handleImageDelete} className="text-pink-600 py-2 px-4 rounded border border-pink-600">
                   Delete
                 </button>
+                
               )}
             </>
           )}
         </div>
+        
 
         <form onSubmit={handleSubmit}>
           {/* Company Name */}
@@ -400,7 +405,7 @@ const validate = () => {
               >
                 <option value="">Select Country</option>
                 {countries.map((c) => (
-                  <option key={c.code} value={c.code}>{c.name}</option>
+                  <option key={c.code ?? c.id ?? c.name} value={c.name}>{c.name}</option>
                 ))}
               </select>
             </div>
@@ -496,13 +501,11 @@ const validate = () => {
       <div className="flex-grow">
         <label className="block font-semibold text-green-600 text-lg mb-2">{link.label}</label>
         <input
-          type="url"
+          type="text"
           value={link.value ?? ""}
           onChange={(e) => updateLinkEditing(link.id, e.target.value)}
-          placeholder="https://..."
-          pattern="https?://.+"
-          title="Please enter a valid URL starting with http:// or https://"
-          className="w-full border rounded-lg border-gray-300 bg-white text-blue-600 p-2 shadow-sm focus:ring-0 focus:outline-none invalid:border-red-400"
+          placeholder="www.example.com or https://..."
+          className="w-full border rounded-lg border-gray-300 bg-white text-blue-600 p-2 shadow-sm focus:ring-0 focus:outline-none"
         />
       </div>
       <button type="button" onClick={() => updateLink(link.id)} className="mt-6">
@@ -530,13 +533,11 @@ const validate = () => {
       <div className="my-3">
         <label className="block font-semibold text-green-600 text-lg mb-2">URL</label>
         <input
-          type="url"
+          type="text"
           value={newLinkValue}
           onChange={(e) => setNewLinkValue(e.target.value)}
-          placeholder="https://..."
-          pattern="https?://.+"
-          title="Please enter a valid URL starting with http:// or https://"
-          className="w-full border rounded-lg border-gray-300 bg-white text-blue-600 p-2 shadow-sm focus:ring-0 focus:outline-none invalid:border-red-400"
+          placeholder="www.example.com or https://..."
+          className="w-full border rounded-lg border-gray-300 bg-white text-blue-600 p-2 shadow-sm focus:ring-0 focus:outline-none"
         />
       </div>
       <div className="flex justify-start space-x-4 mt-4">

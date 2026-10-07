@@ -1,221 +1,260 @@
-// src/data/module1Questions.ts
-
-// 1️⃣ Define a Question type
 export interface Question {
   id: number;
+  section: string;
   question: string;
   options: string[];
-  answer: number; // index of correct option
+  answer: number; // 0-based index of correct option
 }
 
-// 2️⃣ Export the questions array
+// 20 questions × 5 marks = 100 marks total.  Pass mark: 14/20 correct (70 marks).
 export const module1Questions: Question[] = [
+  // ── Section A: Understanding the VA Role ──────────────────────────
   {
     id: 1,
-    question: "What is the main advantage of working as a virtual assistant?",
+    section: 'Section A: Understanding the VA Role',
+    question: 'What is the main role of a Virtual Assistant?',
     options: [
-      "It limits flexibility and location freedom",
-      "It allows you to work remotely and collaborate globally",
-      "It requires strict office hours",
-      "It only applies to IT professionals"
+      'A. Repair cars',
+      'B. Support clients remotely with tasks',
+      'C. Build houses',
+      'D. Sell land',
     ],
-    answer: 1
+    answer: 1, // B
   },
   {
     id: 2,
-    question:
-      "A virtual assistant can charge between ___ per hour depending on skill and service level.",
-    options: ["£1–£10", "£5–£300", "£50–£500", "£3–£30"],
-    answer: 1
+    section: 'Section A: Understanding the VA Role',
+    question: 'A Virtual Assistant usually works:',
+    options: [
+      'A. Only in a hospital',
+      'B. Remotely using internet tools',
+      'C. Only in a classroom',
+      'D. Only at night',
+    ],
+    answer: 1, // B
   },
   {
     id: 3,
-    question: "What is the first step in starting a virtual assistant business?",
+    section: 'Section A: Understanding the VA Role',
+    question: 'Which of these is a common VA task?',
     options: [
-      "Branding and marketing",
-      "Acquiring clients",
-      "Choosing a business name",
-      "Setting your pricing"
+      'A. Email management',
+      'B. Driving buses',
+      'C. Mining gold',
+      'D. Surgery',
     ],
-    answer: 2
+    answer: 0, // A
   },
   {
     id: 4,
-    question: "Why is registering your business name important?",
+    section: 'Section A: Understanding the VA Role',
+    question: 'A VA helps clients save:',
     options: [
-      "It ensures your name cannot be used by competitors",
-      "It guarantees instant profits",
-      "It automatically gets you clients",
-      "It allows you to avoid taxes"
+      'A. Noise',
+      'B. Time',
+      'C. Rain',
+      'D. Fuel only',
     ],
-    answer: 0
+    answer: 1, // B
   },
   {
     id: 5,
-    question: "Which of the following best defines a virtual assistant?",
+    section: 'Section A: Understanding the VA Role',
+    question: 'Which skill is important for a VA?',
     options: [
-      "A robot that automates emails",
-      "A professional offering services to clients digitally",
-      "An on-site administrative assistant",
-      "A freelancer working only with tech companies"
+      'A. Laziness',
+      'B. Organization',
+      'C. Fighting',
+      'D. Gossip',
     ],
-    answer: 1
+    answer: 1, // B
   },
+
+  // ── Section B: Communication & Professionalism ────────────────────
   {
     id: 6,
-    question: "The main purpose of branding and marketing for a VA is to:",
+    section: 'Section B: Communication & Professionalism',
+    question: 'If a client sends instructions, you should:',
     options: [
-      "Increase expenses",
-      "Create recognition and attract clients",
-      "Confuse competitors",
-      "Avoid registration costs"
+      'A. Ignore them',
+      'B. Read carefully and confirm',
+      'C. Delete message',
+      'D. Reply next month',
     ],
-    answer: 1
+    answer: 1, // B
   },
   {
     id: 7,
-    question: "Why do business owners hire virtual assistants to manage emails?",
+    section: 'Section B: Communication & Professionalism',
+    question: "If you don't understand a task:",
     options: [
-      "To reduce productivity and stress",
-      "To increase productivity and save time",
-      "To handle physical letters",
-      "To stop responding to customers"
+      'A. Guess',
+      'B. Ask clear questions',
+      'C. Complain online',
+      'D. Block client',
     ],
-    answer: 1
+    answer: 1, // B
   },
   {
     id: 8,
-    question: "Which of these platforms was specifically mentioned as useful for marketing?",
-    options: ["Fiverr", "LinkedIn", "Workason", "Upwork"],
-    answer: 2
+    section: 'Section B: Communication & Professionalism',
+    question: 'Best tone when replying to a client:',
+    options: [
+      'A. Rude',
+      'B. Professional and polite',
+      'C. Angry',
+      'D. Silent',
+    ],
+    answer: 1, // B
   },
   {
     id: 9,
-    question:
-      "When organizing emails, what is one major reason clients rely on virtual assistants?",
+    section: 'Section B: Communication & Professionalism',
+    question: 'What builds client trust most?',
     options: [
-      "To reduce company emails",
-      "To manage inboxes that can be stressful and time-consuming",
-      "To block spam entirely",
-      "To handle only promotional messages"
+      'A. Excuses',
+      'B. Reliability and timely delivery',
+      'C. Fashion',
+      'D. Arguments',
     ],
-    answer: 1
+    answer: 1, // B
   },
   {
     id: 10,
-    question: "According to the text, what do you need to start a virtual assistant business?",
+    section: 'Section B: Communication & Professionalism',
+    question: 'Missing deadlines often can:',
     options: [
-      "A large rented office space",
-      "A computer and a small workspace at home",
-      "Multiple employees",
-      "A degree in IT"
+      'A. Increase trust',
+      'B. Harm your reputation',
+      'C. Raise salary automatically',
+      'D. Do nothing',
     ],
-    answer: 1
+    answer: 1, // B
   },
+
+  // ── Section C: Tools & Productivity ──────────────────────────────
   {
     id: 11,
-    question: "Virtual Assistance primarily helps businesses by:",
+    section: 'Section C: Tools & Productivity',
+    question: 'Which tool is used for meetings?',
     options: [
-      "Replacing physical offices",
-      "Reducing costs and increasing productivity",
-      "Eliminating client communication",
-      "Limiting scalability"
+      'A. Zoom',
+      'B. Spoon',
+      'C. Pillow',
+      'D. Mirror',
     ],
-    answer: 1
+    answer: 0, // A
   },
   {
     id: 12,
-    question: "Which of the following tools is used for clipboard management on Windows?",
-    options: ["Spartan", "Canva", "Slack", "Asana"],
-    answer: 0
+    section: 'Section C: Tools & Productivity',
+    question: 'Which tool helps with task management?',
+    options: [
+      'A. Trello',
+      'B. Toaster',
+      'C. Netflix',
+      'D. Radio',
+    ],
+    answer: 0, // A
   },
   {
     id: 13,
-    question:
-      "The process of converting printed business cards into a digital Excel file uses:",
+    section: 'Section C: Tools & Productivity',
+    question: 'Which tool is best for documents?',
     options: [
-      "Natural Language Processing (NLP)",
-      "Optical Character Recognition (OCR)",
-      "Image Rendering",
-      "Screen Scraping"
+      'A. Google Docs',
+      'B. Hammer',
+      'C. Flashlight',
+      'D. Kettle',
     ],
-    answer: 1
+    answer: 0, // A
   },
   {
     id: 14,
-    question:
-      "Which file format is faster and smaller but offers fewer data manipulation options?",
-    options: ["Excel (.xlsx)", "CSV (.csv)", "PDF (.pdf)", "JSON (.json)"],
-    answer: 1
+    section: 'Section C: Tools & Productivity',
+    question: 'Why is internet stability important?',
+    options: [
+      'A. For decoration',
+      'B. For smooth communication and delivery',
+      'C. For dancing',
+      'D. For sleep',
+    ],
+    answer: 1, // B
   },
   {
     id: 15,
-    question: "The main goal of data mining is to:",
+    section: 'Section C: Tools & Productivity',
+    question: 'Password security is important because:',
     options: [
-      "Collect contact details manually",
-      "Identify patterns and predict trends in large datasets",
-      "Format spreadsheets",
-      "Remove duplicates in Excel"
+      'A. It protects client data',
+      'B. It makes food sweeter',
+      'C. It changes weather',
+      'D. It grows hair',
     ],
-    answer: 1
+    answer: 0, // A
   },
+
+  // ── Section D: Business Growth & Earnings ────────────────────────
   {
     id: 16,
-    question:
-      "In building an email marketing list, which practice should be avoided?",
+    section: 'Section D: Business Growth & Earnings',
+    question: 'A VA can increase income by:',
     options: [
-      "Offering incentives for subscribers",
-      "Including CTAs in multiple site areas",
-      "Purchasing email lists from unknown sources",
-      "Using pop-ups to collect leads"
+      'A. Learning new skills',
+      'B. Ignoring clients',
+      'C. Sleeping during deadlines',
+      'D. Deleting work',
     ],
-    answer: 2
+    answer: 0, // A
   },
   {
     id: 17,
-    question: "Social media research allows businesses to:",
+    section: 'Section D: Business Growth & Earnings',
+    question: 'Rates may depend on:',
     options: [
-      "Improve audience understanding and market strategy",
-      "Reduce online engagement",
-      "Hide competitors’ data",
-      "Automate all customer service"
+      'A. Value and skill level',
+      'B. Height only',
+      'C. Shoe color',
+      'D. Luck only',
     ],
-    answer: 0
+    answer: 0, // A
   },
   {
     id: 18,
-    question: "Web scraping is best defined as:",
+    section: 'Section D: Business Growth & Earnings',
+    question: 'Repeat clients usually come from:',
     options: [
-      "Copying data from printed materials",
-      "Extracting information from websites using software tools",
-      "Posting content on multiple platforms",
-      "Translating online articles"
+      'A. Poor service',
+      'B. Good results and consistency',
+      'C. Late replies',
+      'D. Arguments',
     ],
-    answer: 1
+    answer: 1, // B
   },
   {
     id: 19,
-    question: "Which of the following is a warning sign of a data entry scam?",
+    section: 'Section D: Business Growth & Earnings',
+    question: 'A portfolio helps by:',
     options: [
-      "Typing speed test requirement",
-      "Upfront payment or “training fee” request",
-      "Remote work flexibility",
-      "Clear contract terms"
+      'A. Showing past work and ability',
+      'B. Hiding skills',
+      'C. Causing confusion',
+      'D. Reducing trust',
     ],
-    answer: 1
+    answer: 0, // A
   },
   {
     id: 20,
-    question: "A well-trained virtual assistant helps businesses most by:",
+    section: 'Section D: Business Growth & Earnings',
+    question: 'Best mindset for a successful VA:',
     options: [
-      "Handling routine tasks so managers can focus on growth",
-      "Managing only financial operations",
-      "Reducing the number of employees",
-      "Creating new software systems"
+      'A. Growth and professionalism',
+      'B. Excuses',
+      'C. Carelessness',
+      'D. Delay',
     ],
-    answer: 0
-  }
+    answer: 0, // A
+  },
 ];
 
-// ✅ Ensure this file is treated as a module
 export {};

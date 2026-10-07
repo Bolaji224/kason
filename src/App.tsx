@@ -89,6 +89,8 @@ import EmployerChatBox from "./components/employer-admin/message/components/Empl
 import ApprovedCandidatesPage from "./components/employer-admin/approved-candidates/ApprovedCandidates";
 import BrowseCandidates from "./components/employer-admin/browse-candidates/BrowseCandidates";
 import Smartstart from "./components/employer-admin/smartstart/Smartstart";
+import SmartStartRequests from "./components/employer-admin/smartstart/SmartStartRequests";
+import TalentPack from "./components/employer-admin/smartstart/TalentPack";
 import ContactUs from "./components/reusable/contact/Contact";
 import CookieBanner from "./components/CookieBanner";
 import AnnouncementBanner from "./components/AnnouncementBanner";
@@ -103,6 +105,8 @@ import Talentvault from "./pages/candidate-talentvault/Talentvault";
 import Inhouse from "./pages/candidate-inhouse/Inhouse";
 import WorkasonTerms from "./pages/Terms/Terms";
 import CookiePrivacyModal from "./pages/cookie-policy/Policy";
+import AffiliatePage from "./pages/affiliate/Affiliate";
+import AffiliateDashboard from "./components/affiliate/AffiliateDashboard";
 
 
 
@@ -181,6 +185,8 @@ function Main({
     "/employers-profile",
     "/browse-candidates",
     "/smartstart",
+    "/smartstart-requests",
+    "/smartstart/:id/talent-pack",
     "/submit-jobs",
     "/saved-candidate",
     "/approved-candidate",
@@ -205,6 +211,8 @@ function Main({
     "/smart-guide/va-beginner",
     "/smart-guide/editor-advanced",
     "/smart-guide/editor-beginner",
+    "/affiliate-dashboard",
+    "/employers-affiliate-dashboard",
   ];
 
   const shouldHideNavbar = hideNavbarPaths.some((path) => {
@@ -241,6 +249,7 @@ function Main({
           <Route path="about" element={<About />} />
           <Route path="Terms" element={<WorkasonTerms />} />
           <Route path="cookie-policy" element={<CookiePrivacyModal />} />
+          <Route path="affiliate" element={<AffiliatePage />} />
           
           <Route path="login" element={<LoginForm />} />
           <Route path="register" element={<RegisterForm />} />
@@ -261,6 +270,16 @@ function Main({
                 onSubmit={(code: string) => console.log("Code submitted:", code)}
               />
             }
+          />
+
+          {/* Affiliate Routes */}
+          <Route
+            path="affiliate-dashboard"
+            element={<AdminLayout element={<AffiliateDashboard />} />}
+          />
+          <Route
+            path="employers-affiliate-dashboard"
+            element={<EmployersLayout element={<AffiliateDashboard />} />}
           />
 
           {/* Candidate/Admin Routes */}
@@ -382,6 +401,14 @@ function Main({
           <Route
             path="smartstart"
             element={<EmployersLayout element={<Smartstart />} />}
+          />
+          <Route
+            path="smartstart-requests"
+            element={<EmployersLayout element={<SmartStartRequests />} />}
+          />
+          <Route
+            path="smartstart/:id/talent-pack"
+            element={<EmployersLayout element={<TalentPack />} />}
           />
           <Route
             path="approved-candidate"

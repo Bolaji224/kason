@@ -41,12 +41,12 @@ const WeWorkPerHourFAQ: React.FC = () => {
             </div>
             <div>
               <strong>2. SmartStart Users</strong> → Clients request pre-vetted
-              freelancers (via SmartStart). WeWorkPerHour matches them with
+              freelancers (via SmartStart). Workason matches them with
               verified talent.
             </div>
             <div>
               <strong>3. Pro Talent Pool Users</strong> → Instead of freelancers,
-              WeWorkPerHour's in-house team (Editors or VAs) delivers the job from
+              Workason's in-house team (Editors or VAs) delivers the job from
               start to finish, with full project management.
             </div>
           </div>
@@ -128,14 +128,14 @@ const WeWorkPerHourFAQ: React.FC = () => {
       category: "Pro Talent Pool Users",
       question: "How is pricing set?",
       answer:
-        "Pricing is based on service packages (e.g., monthly editing retainers, VA support bundles). Clients pay WeWorkPerHour directly, and our internal team handles the job.",
+        "Pricing is based on service packages (e.g., monthly editing retainers, VA support bundles). Clients pay Workason directly, and our internal team handles the job.",
     },
     {
       id: "managed-management",
       category: "Pro Talent Pool Users",
       question: "Who manages the project?",
       answer:
-        "WeWorkPerHour fully manages communication, deadlines, and quality control.",
+        "Workason fully manages communication, deadlines, and quality control.",
     },
     {
       id: "payments-handled",
@@ -175,7 +175,7 @@ const WeWorkPerHourFAQ: React.FC = () => {
     {
       id: "international",
       category: "Other Common Questions",
-      question: "Can international clients use WeWorkPerHour?",
+      question: "Can international clients use Workason?",
       answer:
         "Yes, we support clients and freelancers in Nigeria, the UK, and globally.",
     },

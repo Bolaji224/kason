@@ -108,9 +108,9 @@ export default function TalentVaultPage() {
   );
 
   const accessOptions = [
-    { duration: '3 days', highlight: false },
-    { duration: '7 days', highlight: true },
-    { duration: '14 days', highlight: false },
+    { duration: '3 days', price: '£9', highlight: false },
+    { duration: '7 days', price: '£15', highlight: true },
+    { duration: '14 days', price: '£25', highlight: false },
   ];
 
   const keyFeatures = [
@@ -170,7 +170,8 @@ export default function TalentVaultPage() {
                         Popular
                       </span>
                     )}
-                    {option.duration}
+                    <span className="font-bold">{option.price}</span>
+                    <span className="text-xs ml-1 opacity-75">/ {option.duration}</span>
                   </button>
                 ))}
               </div>
