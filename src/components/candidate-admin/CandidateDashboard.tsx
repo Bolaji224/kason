@@ -62,9 +62,22 @@ type StatCard = {
 /* ---------------------------
    Profile Setup Modal
    --------------------------- */
-const ProfileSetupModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
+interface ProfileSetupModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  heading: string;
+  description: string;
+  ctaLabel: string;
+  skipLabel: string;
+}
+
+const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({
   isOpen,
   onClose,
+  heading,
+  description,
+  ctaLabel,
+  skipLabel,
 }) => {
   const navigate = useNavigate();
 
@@ -79,11 +92,10 @@ const ProfileSetupModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
         </div>
 
         <h2 className="text-2xl font-bold text-gray-800 mb-3">
-          Complete Your Profile
+          {heading}
         </h2>
         <p className="text-gray-500 mb-8 leading-relaxed">
-          Welcome! To get the best experience and start getting hired, please
-          set up your profile first. It only takes a few minutes.Without this your profile won't be recognised
+          {description}
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -94,13 +106,13 @@ const ProfileSetupModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
             }}
             className="bg-green-600 text-white py-3 px-8 rounded-xl font-semibold hover:bg-green-700 transition-colors"
           >
-            Set Up Profile
+            {ctaLabel}
           </button>
           <button
             onClick={onClose}
             className="border border-gray-300 text-gray-600 py-3 px-8 rounded-xl font-semibold hover:bg-gray-50 transition-colors"
           >
-            Do It Later
+            {skipLabel}
           </button>
         </div>
       </div>
@@ -213,7 +225,7 @@ const CandidateDashboard: React.FC = () => {
       icon: <Bookmark size={24} />,
     },
     {
-      title: "Job Engagements",
+      title: candidateDashboard.job_engagements_label,
       value: "—",
       change: "+2 pending",
       trend: "up",
@@ -230,6 +242,10 @@ const CandidateDashboard: React.FC = () => {
       <ProfileSetupModal
         isOpen={showProfileModal}
         onClose={() => setShowProfileModal(false)}
+        heading={candidateDashboard.profile_modal_heading}
+        description={candidateDashboard.profile_modal_description}
+        ctaLabel={candidateDashboard.profile_modal_cta}
+        skipLabel={candidateDashboard.profile_modal_skip}
       />
 
       <div className="max-w-7xl mx-auto">
@@ -284,7 +300,7 @@ const CandidateDashboard: React.FC = () => {
           <div className="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-bold text-slate-900">
-                Application Activity
+                {candidateDashboard.app_activity_heading}
               </h2>
               <div className="flex items-center gap-3">
                 <button
@@ -341,7 +357,7 @@ const CandidateDashboard: React.FC = () => {
           {/* Pie Chart */}
           <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
             <h2 className="text-xl font-bold text-slate-900 mb-6">
-              Application Status
+              {candidateDashboard.app_status_heading}
             </h2>
 
             <ResponsiveContainer width="100%" height={200}>

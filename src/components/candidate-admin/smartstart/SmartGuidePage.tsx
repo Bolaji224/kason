@@ -11,6 +11,7 @@ import { useParams, useNavigate } from "react-router-dom"; // added useNavigate
 import axios from "axios";
 import { APP_API_URL } from "../../../utils/http_utils";
 import ls from "localstorage-slim";
+import { useCMS } from "../../../hooks/useCMS";
 
 type GuideBlock = {
   id: string;
@@ -32,6 +33,7 @@ type GuideResponse = {
 };
 
 const SmartGuidePage: React.FC = () => {
+  const { candidateDashboardSmartGuide: cms } = useCMS();
   const { guideId } = useParams<{ guideId?: string }>();
   const navigate = useNavigate(); //  initialized navigate
   const [guide, setGuide] = useState<GuideBlock | null>(null);
@@ -88,7 +90,7 @@ const SmartGuidePage: React.FC = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <p className="text-gray-500">
-          Guide not found. Please complete the assessment.
+          {cms.not_found_message}
         </p>
       </div>
     );
@@ -156,7 +158,7 @@ const SmartGuidePage: React.FC = () => {
 
           <div className="mt-8 bg-white rounded-xl p-6 shadow-sm max-w-md mx-auto">
             <div className="flex items-center justify-between mb-4">
-              <span className="text-sm font-medium text-gray-600">Progress</span>
+              <span className="text-sm font-medium text-gray-600">{cms.progress_label}</span>
               <span className="text-sm font-medium text-[#2AA100]">
                 {completionRate}%
               </span>
@@ -168,7 +170,7 @@ const SmartGuidePage: React.FC = () => {
               />
             </div>
             <p className="text-xs text-gray-500">
-              {completedModules.length} of {modules.length} modules completed
+              {completedModules.length} {cms.of_text} {modules.length} {cms.modules_completed_text}
             </p>
           </div>
         </div>
@@ -177,7 +179,7 @@ const SmartGuidePage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-8">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">
-              Learning Modules
+              {cms.modules_heading}
             </h2>
             <div className="space-y-4">
               {modules.map((module) => {
@@ -239,7 +241,7 @@ const SmartGuidePage: React.FC = () => {
             {guide.quickWins && guide.quickWins.length > 0 && (
               <div className="bg-white rounded-xl p-6 shadow-sm">
                 <h3 className="text-xl font-bold text-gray-800 mb-4">
-                  Quick Wins
+                  {cms.quickwins_heading}
                 </h3>
                 <ul className="list-disc list-inside space-y-2 text-gray-600">
                   {guide.quickWins.map((win, i) => (
@@ -252,7 +254,7 @@ const SmartGuidePage: React.FC = () => {
             {guide.aiAutomationTips && guide.aiAutomationTips.length > 0 && (
               <div className="bg-white rounded-xl p-6 shadow-sm">
                 <h3 className="text-xl font-bold text-gray-800 mb-4">
-                  AI Automation Tips
+                  {cms.ai_tips_heading}
                 </h3>
                 <ul className="list-disc list-inside space-y-2 text-gray-600">
                   {guide.aiAutomationTips.map((tip, i) => (
@@ -270,7 +272,7 @@ const SmartGuidePage: React.FC = () => {
             onClick={() => navigate("/smartstart-assessment")}
             className="px-6 py-3 rounded-xl bg-[#2AA100] text-white font-semibold hover:bg-green-700 shadow-lg hover:shadow-xl transition-all duration-300"
           >
-            Upgrade Role 
+            {cms.upgrade_button}
           </button>
         </div>
       </div>

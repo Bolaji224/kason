@@ -3,8 +3,10 @@ import Images from "../../../components/constant/Images";
 import { Link } from "react-router-dom";
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
+import { useCMS } from '../../../hooks/useCMS';
 
 const JoinUsSection: React.FC = () => {
+  const { employers } = useCMS();
   const { ref: sectionRef, inView: sectionInView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -38,20 +40,20 @@ const JoinUsSection: React.FC = () => {
           className="lg:w-[50%]"
         >
           <h2 className="lg:text-[38px] md:text-[24px] text-[20px] mt-[1rem] font-sans font-semibold tracking-[1px]">
-            Come join us and enjoy our
-            <span className="text-[#ee009d]"> interesting features.</span>
+            {employers.emp_join_heading}
+            <span className="text-[#ee009d]"> {employers.emp_join_highlight}</span>
           </h2>
           <div className="py-[1rem]">
-            <Link to="/register">
+            <Link to={employers.emp_join_url}>
               <button className="font-sans text-[14px] font-medium text-[#FFFFFF] bg-[#EE009D] hover:bg-[#2AA100] py-[6px] px-[10px] rounded-[5px] justify-center">
-                Get Started
+                {employers.emp_join_button}
               </button>
             </Link>
           </div>
         </motion.div>
       </motion.section>
     </section>
-
   );
 };
+
 export default JoinUsSection;

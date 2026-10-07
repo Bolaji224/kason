@@ -3,6 +3,7 @@ import { usePaystackPayment } from "react-paystack";
 import { httpGetWithToken, httpPostWithToken, APP_API_URL } from "../../../utils/http_utils";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { useCMS } from "../../../hooks/useCMS";
 import ls from "localstorage-slim";
 import {
   MapPin,
@@ -52,6 +53,7 @@ interface CandidateModalProps {
 }
 
 const CandidateDetailModal: React.FC<CandidateModalProps> = ({ candidate, onClose, onMessage }) => {
+  const { employerDashboardTalentVault: cms } = useCMS();
   const backdropRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -214,7 +216,7 @@ const CandidateDetailModal: React.FC<CandidateModalProps> = ({ candidate, onClos
               onClick={() => { onClose(); onMessage(candidate); }}
               className="flex-1 flex items-center justify-center gap-2 bg-green-700 hover:bg-green-800 text-white py-3 rounded-2xl font-semibold text-sm transition-all shadow-md hover:shadow-lg"
             >
-              <Send size={16} /> Message Candidate
+              <Send size={16} /> {cms.send_message_button}
             </button>
             <button
               onClick={onClose}
@@ -304,7 +306,8 @@ const CandidateCard: React.FC<{
   candidate: any;
   onViewDetails: (c: any) => void;
   onMessage: (c: any) => void;
-}> = ({ candidate, onViewDetails, onMessage }) => {
+  viewDetailsLabel: string;
+}> = ({ candidate, onViewDetails, onMessage, viewDetailsLabel }) => {
   const avatarUrl = resolveAvatar(candidate.avatar);
   const displayName = candidate.first_name
     ? `${candidate.first_name} ${candidate.last_name || ""}`.trim()
@@ -393,7 +396,7 @@ const CandidateCard: React.FC<{
           onClick={() => onViewDetails(candidate)}
           className="flex-1 py-2 text-sm font-semibold border-2 border-green-600 text-green-700 rounded-xl hover:bg-green-600 hover:text-white transition-all duration-200"
         >
-          View Details
+          {viewDetailsLabel}
         </button>
         <button
           onClick={() => onMessage(candidate)}
@@ -409,6 +412,7 @@ const CandidateCard: React.FC<{
 // ── Main Component ─────────────────────────────────────────────────────────
 
 const BrowseCandidates: React.FC = () => {
+  const { employerDashboardTalentVault: cms } = useCMS();
   const [candidates, setCandidates] = useState<any[]>([]);
   const [hasPaid, setHasPaid] = useState(false);
   const [isSmartStart, setIsSmartStart] = useState<boolean | null>(null);
@@ -533,7 +537,7 @@ const BrowseCandidates: React.FC = () => {
       <div className="lg:ml-64 p-6 min-h-screen flex items-center justify-center">
         <div className="text-center space-y-3">
           <div className="w-10 h-10 border-4 border-green-600 border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-gray-400 text-sm">Loading Talent Vault…</p>
+          <p className="text-gray-400 text-sm">{cms.loading_text}</p>
         </div>
       </div>
     );
@@ -546,16 +550,15 @@ const BrowseCandidates: React.FC = () => {
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5">
             <Lock className="w-8 h-8 text-green-700" />
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-3">SmartStart™ Members Only</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-3">{cms.smartstart_only_heading}</h2>
           <p className="text-gray-500 text-sm leading-relaxed mb-6">
-            The Talent Vault is exclusively available to employers who have activated a
-            SmartStart™ plan. Upgrade to unlock access to our verified talent pool.
+            {cms.smartstart_only_description}
           </p>
           <button
             onClick={() => navigate("/employer-smartstart")}
             className="bg-green-700 text-white px-6 py-3 rounded-xl font-semibold hover:bg-green-800 transition-all"
           >
-            Activate SmartStart™
+            {cms.smartstart_only_button}
           </button>
         </div>
       </div>
@@ -568,13 +571,13 @@ const BrowseCandidates: React.FC = () => {
       <header className="mb-8 border-b pb-5">
         <div className="flex items-center gap-3 mb-1">
           <ShieldCheck className="w-6 h-6 text-green-700" />
-          <h1 className="text-2xl font-bold text-gray-800">Talent Vault</h1>
+          <h1 className="text-2xl font-bold text-gray-800">{cms.page_heading}</h1>
           <span className="bg-green-700 text-green-50 text-xs font-semibold px-3 py-1 rounded-full">
-            SmartStart™ Exclusive
+            {cms.page_badge}
           </span>
         </div>
         <p className="text-gray-400 text-sm">
-          Access verified freelancers hand-picked from our talent pool.
+          {cms.page_description}
         </p>
       </header>
 
@@ -582,8 +585,8 @@ const BrowseCandidates: React.FC = () => {
       {!hasPaid ? (
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Access the Verified Talent Vault</h2>
-            <p className="text-gray-500 text-sm">Choose a plan to unlock the full verified candidate list.</p>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">{cms.pricing_heading}</h2>
+            <p className="text-gray-500 text-sm">{cms.pricing_description}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {VAULT_PLANS.map((plan, i) => (
@@ -595,7 +598,7 @@ const BrowseCandidates: React.FC = () => {
               >
                 {i === 1 && (
                   <span className="bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full mb-3">
-                    Most Popular
+                    {cms.popular_badge}
                   </span>
                 )}
                 <div className="flex items-center gap-1.5 text-gray-500 text-sm mb-4">
@@ -634,10 +637,11 @@ const BrowseCandidates: React.FC = () => {
                   candidate={candidate}
                   onViewDetails={setDetailCandidate}
                   onMessage={setMessageCandidate}
+                  viewDetailsLabel={cms.view_details_button}
                 />
               ))
             ) : (
-              <p className="text-gray-500 col-span-3 text-center py-12">No candidates found.</p>
+              <p className="text-gray-500 col-span-3 text-center py-12">{cms.candidates_empty}</p>
             )}
           </div>
         </>
