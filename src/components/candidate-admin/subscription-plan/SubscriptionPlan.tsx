@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios';
 import { ChevronDown, ChevronUp, Upload, Calendar, Check, X, ArrowLeft, ArrowRight, Sparkles, User, Briefcase, FileText, Package, Clock, Shield } from 'lucide-react';
 import { httpGetWithoutToken } from "../../../utils/http_utils"; // adjust path as needed
-import { useCMS } from "../../../hooks/useCMS";
+import { COUNTRIES_LIST } from "../../../utils/countriesList";
+import { useCMS } from "../../../hooks/use
 
 interface FormData {
   fullName: string;
@@ -62,15 +64,13 @@ const SubscriptionPlan = () => {
 
     const getCountries = async () => {
         try {
-            const res = await httpGetWithoutToken("countries");
-            const items: any[] = Array.isArray(res)
-                ? res
-                : Array.isArray(res?.data)
-                ? res.data
-                : [];
-            setCountries(items);
-        } catch (error) {
-            console.error("Failed to fetch countries:", error);
+            const res = await axios.get("https://restcountries.com/v3.1/all?fields=name,cca2");
+            const sorted = res.data
+                .map((c: any) => ({ code: c.cca2, name: c.name.common }))
+                .sort((a: any, b: any) => a.name.localeCompare(b.name));
+            setCountries(sorted);
+        } catch {
+            setCountries(COUNTRIES_LIST);
         }
     };
 
@@ -362,9 +362,8 @@ const SubscriptionPlan = () => {
                               <h3 className={`text-2xl font-bold bg-gradient-to-r ${pkg.gradient} bg-clip-text text-transparent mb-4`}>{pkg.name}</h3>
                               <div className="flex items-baseline justify-center gap-3">
                                 <span className={`text-5xl font-bold bg-gradient-to-r ${pkg.gradient} bg-clip-text text-transparent`}>{pkg.price}</span>
-                                <span className="text-gray-400 text-sm font-medium">/ {pkg.naira}</span>
                               </div>
-                              <p className="text-xs text-gray-400 mt-1">at ₦2,000 per £1</p>
+                              <p className="text-xs text-gray-400 mt-1">Pay in Naira: {pkg.naira} (at ₦2,000 per £1)</p>
                             </div>
                             <p className="text-sm text-gray-600 text-center leading-relaxed">{pkg.description}</p>
                           </div>

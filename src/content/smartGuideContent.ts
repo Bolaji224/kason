@@ -10,7 +10,7 @@ export const smartGuideContent: Record<SmartGuideKey, string> = {
   Intro to VA work, basic admin tasks, communication support, and simple online tools.
 
   Client Acquisition Blueprint:
-  • Target LinkedIn, WeWorkPerHour, and beginner-friendly job boards (e.g., Fiverr, Upwork).
+  • Target LinkedIn, Workason, and beginner-friendly job boards (e.g., Fiverr, Upwork).
   • Send 5–10 personalised proposals daily.
   • Join 3 Facebook/LinkedIn groups for VA opportunities.
 

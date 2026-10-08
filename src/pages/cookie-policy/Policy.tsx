@@ -182,6 +182,15 @@ export default function CookiePrivacyModal() {
             </p>
           </div>
 
+          {/* UK ICO Notice */}
+          <div style={{ ...s.noticeCard, background: "#f0f9ff", borderColor: "#bae6fd", marginTop: 12 }}>
+            <p style={{ ...s.noticeText, marginBottom: 0, fontSize: 12, color: "#0369a1" }}>
+              Workason is registered with the UK Information Commissioner's Office (ICO) as a data controller.
+              Registration number: [INSERT NUMBER]. We process personal data in accordance with the UK GDPR,
+              Data Protection Act 2018, and PECR.
+            </p>
+          </div>
+
           {/* Cookie type cards */}
           <div style={s.cardList}>
             {COOKIE_TYPES.map((type: CookieType) => {

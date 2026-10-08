@@ -115,9 +115,32 @@ export default function TalentVaultPage() {
   const navigate = useNavigate();
   const { freelancersTalentVault } = useCMS();
 
+
+  const totalSlides = Math.ceil(talents.length / TALENT_PER_SLIDE);
+  const canPrev = carouselIndex > 0;
+  const canNext = carouselIndex < totalSlides - 1;
+  const visibleTalents = talents.slice(
+    carouselIndex * TALENT_PER_SLIDE,
+    carouselIndex * TALENT_PER_SLIDE + TALENT_PER_SLIDE
+  );
+
+  const accessOptions = [
+    { duration: '3 days', price: '£9', highlight: false },
+    { duration: '7 days', price: '£15', highlight: true },
+    { duration: '14 days', price: '£25', highlight: false },
+  ];
+
+  const keyFeatures = [
+    { icon: CheckCircle, label: 'Pre-vetted, verified talents only' },
+    { icon: Eye, label: 'No public competition' },
+    { icon: Clock, label: 'Faster shortlisting' },
+    { icon: Target, label: 'Ideal for agencies, busy professionals, and HR teams' },
+  ];
+
   const accessOptions = safeJsonArray<AccessOption>(freelancersTalentVault.fl_tv_access_options_json, DEFAULT_ACCESS_OPTIONS);
   const keyFeatures   = safeJsonArray<KeyFeature>(freelancersTalentVault.fl_tv_features_json, DEFAULT_KEY_FEATURES);
   const whatYouGet    = safeJsonArray<string>(freelancersTalentVault.fl_tv_what_you_get_json, DEFAULT_WHAT_YOU_GET);
+
 
   const talents      = DEMO_TALENTS;
   const totalSlides  = Math.ceil(talents.length / TALENT_PER_SLIDE);
@@ -165,7 +188,8 @@ export default function TalentVaultPage() {
                         Popular
                       </span>
                     )}
-                    {option.duration}
+                    <span className="font-bold">{option.price}</span>
+                    <span className="text-xs ml-1 opacity-75">/ {option.duration}</span>
                   </button>
                 ))}
               </div>

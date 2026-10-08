@@ -19,7 +19,7 @@ const PopupModal: React.FC<PopupModalProps> = ({ isOpen, onClose }) => {
         </button>
 
         <h2 className="text-lg font-semibold text-center mb-2">
-          Welcome to <span className="text-[#1E2A38]">Weworkperhour</span>
+          Welcome to <span className="text-[#1E2A38]">Workason</span>
         </h2>
         <p className="text-sm text-gray-700 text-center">
           You need to get <strong>SkillStamp</strong> before continuing.

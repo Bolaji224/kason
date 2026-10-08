@@ -115,7 +115,7 @@ const CandidateRegisterForm: React.FC = () => {
         <div className="w-full lg:w-1/2">
           <div>
           <h2 className="text-2xl font-sans font-bold text-center mb-6">
-              Welcome to  <Link to='/'><span className="text-[#ee009d]">WeWorkPerHour</span>
+              Welcome to  <Link to='/'><span className="text-[#ee009d]">Workason</span>
               </Link>
             </h2>
           </div>

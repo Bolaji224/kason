@@ -1,7 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
 import { httpGetWithToken, httpPostWithToken } from "../../../../utils/http_utils";
+
+import { COUNTRIES_LIST } from "../../../../utils/countriesList";
+
 import { useCMS } from "../../../../hooks/useCMS";
+
 
 const AngleDownIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -199,9 +203,8 @@ const getResources = () => {
         .map((c: any) => ({ code: c.cca2, name: c.name.common }))
         .sort((a: any, b: any) => a.name.localeCompare(b.name));
       setCountries(sorted);
-    } catch (err) {
-      console.error("Failed to fetch countries:", err);
-      setCountries([]);
+    } catch {
+      setCountries(COUNTRIES_LIST);
     }
   };
 

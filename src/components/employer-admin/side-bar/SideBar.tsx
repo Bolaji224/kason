@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { FaCircle, FaFileAlt } from "react-icons/fa";
 import { UilCreateDashboard, UilSignout, UilWallet } from "@iconscout/react-unicons";
 import { FaBarsStaggered, FaCertificate, FaEnvelope, FaRocket } from "react-icons/fa6";
+import { Network } from "lucide-react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { IoBookmarkOutline, IoNotificationsOutline } from "react-icons/io5";
 import Images from "../../constant/Images";
@@ -216,12 +217,24 @@ const SideNav: React.FC = () => {
             <Link to="/smartstart" onClick={handleNavClick}>
               <li
                 className={`py-2 hover:text-[#2AA100] hover:rounded-lg mt-[1.5rem] text-[16px] font-sans font-semibold flex items-center gap-[1rem] ${
-                  isActive("/Smartstart")
+                  isActive("/smartstart")
                     ? "outline outline-1 outline-[#EE009D] rounded-lg px-[1rem] text-[#2AA100]"
                     : "text-[#1E2A38] hover:text-[#2AA100]"
                 }`}
               >
-                <IoBookmarkOutline size={25} /> Smartstart
+                <FaRocket size={22} /> SmartStart™
+              </li>
+            </Link>
+
+            <Link to="/smartstart-requests" onClick={handleNavClick}>
+              <li
+                className={`py-2 hover:text-[#2AA100] hover:rounded-lg mt-[0.5rem] text-[14px] font-sans font-medium flex items-center gap-[1rem] pl-[1rem] ${
+                  isActive("/smartstart-requests")
+                    ? "outline outline-1 outline-[#EE009D] rounded-lg px-[1rem] text-[#2AA100]"
+                    : "text-[#1E2A38] hover:text-[#2AA100]"
+                }`}
+              >
+                <FaFileAlt size={18} /> My Requests
               </li>
             </Link>
 
@@ -287,6 +300,19 @@ const SideNav: React.FC = () => {
                 }`}
               >
                 <UilWallet size={25} /> Report
+              </li>
+            </Link>
+
+            {/* Affiliate Programme */}
+            <Link to="/employers-affiliate-dashboard" onClick={handleNavClick}>
+              <li
+                className={`py-2 hover:text-[#2AA100] hover:rounded-lg mt-[1.5rem] text-[16px] font-sans font-semibold flex items-center gap-[1rem] ${
+                  isActive("/employers-affiliate-dashboard")
+                    ? "outline outline-1 outline-[#EE009D] rounded-lg px-[1rem] text-[#2AA100]"
+                    : "text-[#1E2A38] hover:text-[#2AA100]"
+                }`}
+              >
+                <Network size={25} /> Affiliate Programme
               </li>
             </Link>
           </ul>
